@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高等数学 · 立体曲面3D展示</title>
+<style>
+:root {
+  --bg: #1a1a2e; --card: #16213e; --accent: #0f3460;
+  --gold: #e94560; --text: #eee; --sub: #aaa;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+  background: var(--bg); color: var(--text); overflow: hidden;
+  height: 100dvh; width: 100vw;
+}
+#canvas-container { position:fixed; inset:0; z-index:1; }
+#canvas-container canvas { display:block; }
+
+/* Sidebar */
+#sidebar {
+  position:fixed; top:0; left:0; z-index:10;
+  width:280px; height:100dvh; background:rgba(22,33,62,0.95);
+  backdrop-filter:blur(10px); border-right:1px solid rgba(255,255,255,0.1);
+  overflow-y:auto; padding:12px;
+  transition: transform 0.3s;
+}
+#sidebar.hidden { transform: translateX(-100%); }
+
+#sidebar h2 {
+  font-size:1em; text-align:center; padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,0.15); margin-bottom:10px;
+  background: linear-gradient(135deg, #e94560, #c23152);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+
+.surface-btn {
+  display:block; width:100%; padding:10px 12px; margin:4px 0;
+  background:var(--card); color:var(--text); border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px; cursor:pointer; text-align:left; font-size:0.82em;
+  transition:all 0.2s;
+}
+.surface-btn:hover { background:#1a3a5c; border-color:var(--gold); }
+.surface-btn.active { background:var(--accent); border-color:var(--gold); color:#fff; }
+.surface-btn .eq { display:block; font-size:0.78em; color:var(--sub); margin-top:2px;
+  font-family:'Cambria Math','Times New Roman',serif; }
+
+.section-label {
+  font-size:0.7em; color:var(--gold); text-transform:uppercase;
+  letter-spacing:1px; margin:8px 0 4px; padding:4px 0;
+}
+
+/* Toggle button for mobile */
+#toggle-btn {
+  position:fixed; top:10px; left:10px; z-index:20;
+  width:36px; height:36px; border-radius:50%; background:var(--card);
+  border:1px solid rgba(255,255,255,0.2); color:#fff; font-size:1.2em;
+  cursor:pointer; display:none; align-items:center; justify-content:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.5);
+}
+@media (max-width:600px) {
+  #sidebar { width:260px; transform:translateX(-100%); }
+  #sidebar.open { transform:translateX(0); }
+  #toggle-btn { display:flex; }
+}
+
+/* Info overlay */
+#info {
+  position:fixed; bottom:16px; right:16px; z-index:10;
+  background:rgba(22,33,62,0.85); padding:10px 16px; border-radius:10px;
+  font-size:0.75em; color:var(--sub); border:1px solid rgba(255,255,255,0.1);
+  pointer-events:none;
+}
+#info .title { font-size:1.1em; color:#fff; font-weight:700; }
+#info .equation { font-family:'Cambria Math','Times New Roman',serif; color:var(--gold); }
+
+/* Loading */
+#loading {
+  position:fixed; inset:0; z-index:100; display:flex;
+  align-items:center; justify-content:center; background:var(--bg);
+  font-size:1.2em;
+}
+</style>
+</head>
+<body>
+
+<div id="loading">⏳ 加载 Three.js...</div>
+
+<button id="toggle-btn" onclick="toggleSidebar()">☰</button>
+
+<div id="sidebar">
+  <h2>📐 立体曲面展示</h2>
+
+  <div class="section-label">二次曲面</div>
+  <button class="surface-btn active" data-id="ellipsoid">
+    椭球面<span class="eq">x²/a² + y²/b² + z²/c² = 1</span></button>
+  <button class="surface-btn" data-id="hyperboloid1">
+    单叶双曲面<span class="eq">x²/a² + y²/b² − z²/c² = 1</span></button>
+  <button class="surface-btn" data-id="hyperboloid2">
+    双叶双曲面<span class="eq">x²/a² − y²/b² − z²/c² = 1</span></button>
+  <button class="surface-btn" data-id="elliptic-paraboloid">
+    椭圆抛物面<span class="eq">z = x²/a² + y²/b²</span></button>
+  <button class="surface-btn" data-id="hyperbolic-paraboloid">
+    双曲抛物面(马鞍面)<span class="eq">z = x²/a² − y²/b²</span></button>
+  <button class="surface-btn" data-id="cone">
+    圆锥面<span class="eq">z² = x² + y²</span></button>
+
+  <div class="section-label">柱面</div>
+  <button class="surface-btn" data-id="cylinder">
+    圆柱面<span class="eq">x² + y² = R²</span></button>
+  <button class="surface-btn" data-id="parabolic-cylinder">
+    抛物柱面<span class="eq">y² = 2px</span></button>
+  <button class="surface-btn" data-id="hyperbolic-cylinder">
+    双曲柱面<span class="eq">x²/a² − y²/b² = 1</span></button>
+
+  <div class="section-label">旋转曲面</div>
+  <button class="surface-btn" data-id="torus">
+    环面(轮胎面)<span class="eq">(√(x²+y²)−R)² + z² = r²</span></button>
+  <button class="surface-btn" data-id="rotating-hyperboloid">
+    旋转单叶双曲面<span class="eq">绕z轴旋转双曲线</span></button>
+
+  <div class="section-label">空间曲线</div>
+  <button class="surface-btn" data-id="helix">
+    圆柱螺旋线<span class="eq">x=Rcos t, y=Rsin t, z=ct</span></button>
+  <button class="surface-btn" data-id="viviani">
+    维维亚尼曲线<span class="eq">球面与圆柱面交线</span></button>
+  <button class="surface-btn" data-id="conic-spiral">
+    圆锥螺旋线<span class="eq">x=tcos t, y=tsin t, z=t</span></button>
+
+  <div class="section-label">复合展示</div>
+  <button class="surface-btn" data-id="sphere-cylinder">
+    球面+圆柱面(交线)<span class="eq">x²+y²+z²=R², x²+y²=Rx</span></button>
+  <button class="surface-btn" data-id="paraboloid-cone">
+    抛物面+平面(截面)<span class="eq">z=x²+y², z=k</span></button>
+
+  <p style="font-size:0.65em;color:var(--sub);margin-top:12px;text-align:center;">
+    🖱 拖拽旋转 · 滚轮缩放 · 右键平移<br>📱 手机支持触屏手势
+  </p>
+</div>
+
+<div id="info">
+  <div class="title" id="info-title">椭球面</div>
+  <div class="equation" id="info-eq">x²/a² + y²/b² + z²/c² = 1</div>
+</div>
+
+<div id="canvas-container"></div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// Hide loading
+document.getElementById('loading').style.display = 'none';
+
+// Scene setup
+const container = document.getElementById('canvas-container');
+const scene = new THREE.Scene();
+
+// Background gradient
+scene.background = new THREE.Color(0x1a1a2e);
+scene.fog = new THREE.Fog(0x1a1a2e, 15, 50);
+
+const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 100);
+camera.position.set(6, 3.5, 8);
+camera.lookAt(0, 0, 0);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(container.clientWidth, container.clientHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+container.appendChild(renderer.domElement);
+
+// Controls
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.minDistance = 3;
+controls.maxDistance = 20;
+controls.target.set(0, 0, 0);
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0x404060, 1.5);
+scene.add(ambientLight);
+const dirLight = new THREE.DirectionalLight(0xffffff, 3);
+dirLight.position.set(5, 10, 7);
+scene.add(dirLight);
+const dirLight2 = new THREE.DirectionalLight(0x8899cc, 1.5);
+dirLight2.position.set(-3, -1, -5);
+scene.add(dirLight2);
+
+// Grid
+const gridHelper = new THREE.PolarGridHelper(6, 32, 24, 128, 0x444466, 0x333355);
+scene.add(gridHelper);
+
+// Axes
+function createAxes() {
+  const group = new THREE.Group();
+  const len = 7;
+  const colors = [0xff4444, 0x44ff44, 0x4488ff]; // X red, Y green, Z blue
+  const dirs = [new THREE.Vector3(1,0,0), new THREE.Vector3(0,1,0), new THREE.Vector3(0,0,1)];
+
+  dirs.forEach((dir, i) => {
+    const arrow = new THREE.ArrowHelper(dir, new THREE.Vector3(0,0,0), len, colors[i], 0.2, 0.1);
+    group.add(arrow);
+
+    const arrowNeg = new THREE.ArrowHelper(dir.clone().negate(), new THREE.Vector3(0,0,0), len, colors[i], 0.2, 0.1);
+    arrowNeg.setColor(new THREE.Color(colors[i]).multiplyScalar(0.4));
+    group.add(arrowNeg);
+  });
+  return group;
+}
+const axes = createAxes();
+scene.add(axes);
+
+// Current surface group
+let currentGroup = new THREE.Group();
+scene.add(currentGroup);
+let currentId = 'ellipsoid';
+
+// Helper: create wireframe mesh
+function createSurface(geometry, color = 0x4488ff, opacity = 0.85) {
+  const material = new THREE.MeshPhysicalMaterial({
+    color, metalness: 0.05, roughness: 0.3,
+    transparent: true, opacity,
+    side: THREE.DoubleSide,
+    clearcoat: 0.1,
+  });
+  const mesh = new THREE.Mesh(geometry, material);
+
+  // Wireframe overlay
+  const wireframe = new THREE.LineSegments(
+    new THREE.WireframeGeometry(geometry, 1),
+    new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.08 })
+  );
+  mesh.add(wireframe);
+
+  return mesh;
+}
+
+function createCurve(points, color = 0xffdd44, lineWidth = 1) {
+  const geometry = new THREE.BufferGeometry().setFromPoints(points);
+  const material = new THREE.LineBasicMaterial({ color, linewidth: lineWidth });
+  return new THREE.Line(geometry, material);
+}
+
+function createTubeCurve(points, color = 0xffdd44, radius = 0.05) {
+  const curve = new THREE.CatmullRomCurve3(points);
+  const geometry = new THREE.TubeGeometry(curve, 200, radius, 8, false);
+  const material = new THREE.MeshStandardMaterial({ color, metalness: 0.3, roughness: 0.4, emissive: color, emissiveIntensity: 0.3 });
+  return new THREE.Mesh(geometry, material);
+}
+
+// ==================== SURFACE GENERATORS ====================
+
+function makeEllipsoid(a = 2, b = 1.5, c = 1) {
+  const g = new THREE.SphereGeometry(1, 80, 60);
+  const positions = g.attributes.position;
+  for (let i = 0; i < positions.count; i++) {
+    const x = positions.getX(i), y = positions.getY(i), z = positions.getZ(i);
+    positions.setXYZ(i, x * a, y * c, z * b);
+  }
+  g.computeVertexNormals();
+  return g;
+}
+
+function makeHyperboloid1(a = 1.5, b = 1.5, c = 1, height = 2.5) {
+  // Parametric: x=a√(1+u²)cos v, y=b√(1+u²)sin v, z=c·u
+  const segmentsU = 60, segmentsV = 80;
+  const vertices = [], indices = [];
+  const uMin = -height / c, uMax = height / c;
+
+  for (let i = 0; i <= segmentsU; i++) {
+    const u = uMin + (uMax - uMin) * i / segmentsU;
+    const r = Math.sqrt(1 + u * u);
+    for (let j = 0; j <= segmentsV; j++) {
+      const v = 2 * Math.PI * j / segmentsV;
+      vertices.push(a * r * Math.cos(v), c * u, b * r * Math.sin(v));
+    }
+  }
+
+  for (let i = 0; i < segmentsU; i++) {
+    for (let j = 0; j < segmentsV; j++) {
+      const a0 = i * (segmentsV + 1) + j;
+      const a1 = a0 + segmentsV + 1;
+      indices.push(a0, a1, a0 + 1, a1, a1 + 1, a0 + 1);
+    }
+  }
+
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+  g.setIndex(indices);
+  g.computeVertexNormals();
+  return g;
+}
+
+function makeHyperboloid2(a = 1.5, b = 1.5, c = 1) {
+  // Two separate sheets: z = ±c√(1 + x²/a² + y²/b²)
+  const group = new THREE.Group();
+  const res = 80;
+  const maxR = 3.5;
+
+  for (let sign of [-1, 1]) {
+    const vertices = [], indices = [];
+    for (let i = 0; i <= res; i++) {
+      const r = maxR * i / res;
+      for (let j = 0; j <= res; j++) {
+        const theta = 2 * Math.PI * j / res;
+        const x = r * Math.cos(theta);
+        const y = r * Math.sin(theta);
+        const z = sign * c * Math.sqrt(1 + x * x / (a * a) + y * y / (b * b));
+        vertices.push(x, z, y);
+      }
+    }
+    for (let i = 0; i < res; i++) {
+      for (let j = 0; j < res; j++) {
+        const a0 = i * (res + 1) + j;
+        const a1 = a0 + res + 1;
+        indices.push(a0, a1, a0 + 1, a1, a1 + 1, a0 + 1);
+      }
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    g.setIndex(indices);
+    g.computeVertexNormals();
+
+    const color = sign > 0 ? 0x44aaff : 0xff6644;
+    const mesh = createSurface(g, color, 0.8);
+    group.add(mesh);
+  }
+  return group;
+}
+
+function makeEllipticParaboloid(a = 1.5, b = 1.2, height = 3) {
+  const res = 80;
+  const vertices = [], indices = [];
+  const maxR = Math.sqrt(height);
+
+  for (let i = 0; i <= res; i++) {
+    const r = maxR * i / res;
+    for (let j = 0; j <= res; j++) {
+      const theta = 2 * Math.PI * j / res;
+      const x = a * r * Math.cos(theta);
+      const y = b * r * Math.sin(theta);
+      const z = (x * x) / (a * a) + (y * y) / (b * b);
+      vertices.push(x, z, y);
+    }
+  }
+  for (let i = 0; i < res; i++) {
+    for (let j = 0; j < res; j++) {
+      const a0 = i * (res + 1) + j;
+      const a1 = a0 + res + 1;
+      indices.push(a0, a1, a0 + 1, a1, a1 + 1, a0 + 1);
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+  g.setIndex(indices);
+  g.computeVertexNormals();
+  return g;
+}
+
+function makeHyperbolicParaboloid(size = 2.5) {
+  // z = x² - y² (马鞍面)
+  const res = 100;
+  const vertices = [], indices = [];
+
+  for (let i = 0; i <= res; i++) {
+    const x = -size + 2 * size * i / res;
+    for (let j = 0; j <= res; j++) {
+      const y = -size + 2 * size * j / res;
+      const z = (x * x - y * y) / 2;
+      vertices.push(x, z, y);
+    }
+  }
+  for (let i = 0; i < res; i++) {
+    for (let j = 0; j < res; j++) {
+      const a0 = i * (res + 1) + j;
+      const a1 = a0 + res + 1;
+      indices.push(a0, a1, a0 + 1, a1, a1 + 1, a0 + 1);
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+  g.setIndex(indices);
+  g.computeVertexNormals();
+  return g;
+}
+
+function makeCone(height = 3, radius = 2) {
+  // z² = x² + y² → upper and lower cones
+  const group = new THREE.Group();
+  for (let sign of [1, -1]) {
+    const g = new THREE.ConeGeometry(radius, height, 80, 1, true);
+    g.translate(0, sign * height / 2, 0);
+    const mesh = createSurface(g, sign > 0 ? 0xff8844 : 0x4488ff, 0.75);
+    group.add(mesh);
+  }
+  return group;
+}
+
+function makeCylinder(radius = 1.5, height = 4) {
+  const g = new THREE.CylinderGeometry(radius, radius, height, 80, 1, true);
+  g.translate(0, 0, 0);
+  return g;
+}
+
+function makeParabolicCylinder(size = 3) {
+  // y² = 2px → y² = 4x (p=2)
+  const res = 80;
+  const vertices = [], indices = [];
+  const zRange = 3;
+
+  for (let i = 0; i <= res; i++) {
+    const y = -size + 2 * size * i / res;
+    for (let j = 0; j <= res; j++) {
+      const z = -zRange + 2 * zRange * j / res;
+      const x = y * y / 4;
+      vertices.push(x, y, z);
+    }
+  }
+  for (let i = 0; i < res; i++) {
+    for (let j = 0; j < res; j++) {
+      const a0 = i * (res + 1) + j;
+      const a1 = a0 + res + 1;
+      indices.push(a0, a1, a0 + 1, a1, a1 + 1, a0 + 1);
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+  g.setIndex(indices);
+  g.computeVertexNormals();
+  return g;
+}
+
+function makeHyperbolicCylinder(size = 3, zRange = 3) {
+  // x²/a² - y²/b² = 1
+  const a = 1.5, b = 1;
+  const res = 80;
+  const vertices = [], indices = [];
+
+  for (let i = 0; i <= res; i++) {
+    const u = -size / a + 2 * size / a * i / res;
+    for (let j = 0; j <= res; j++) {
+      const z = -zRange + 2 * zRange * j / res;
+      const x = a * Math.cosh(Math.abs(u) < 3 ? u : Math.sign(u) * 3);
+      const y = b * Math.sinh(Math.abs(u) < 3 ? u : Math.sign(u) * 3);
+      vertices.push(x, y, z);
+    }
+  }
+  // Second branch
+  const offset = (res + 1) * (res + 1);
+  for (let i = 0; i <= res; i++) {
+    const u = -size / a + 2 * size / a * i / res;
+    for (let j = 0; j <= res; j++) {
+      const z = -zRange + 2 * zRange * j / res;
+      const x = -a * Math.cosh(Math.abs(u) < 3 ? u : Math.sign(u) * 3);
+      const y = b * Math.sinh(Math.abs(u) < 3 ? u : Math.sign(u) * 3);
+      vertices.push(x, y, z);
+    }
+  }
+  for (let i = 0; i < res; i++) {
+    for (let j = 0; j < res; j++) {
+      let a0 = i * (res + 1) + j, a1 = a0 + res + 1;
+      indices.push(a0, a1, a0 + 1, a1, a1 + 1, a0 + 1);
+      a0 += offset; a1 += offset;
+      indices.push(a0, a1, a0 + 1, a1, a1 + 1, a0 + 1);
+    }
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+  g.setIndex(indices);
+  g.computeVertexNormals();
+  return g;
+}
+
+function makeTorus(R = 2, r = 0.6) {
+  const g = new THREE.TorusGeometry(R, r, 48, 100);
+  return g;
+}
+
+function makeRotatingHyperboloid(a = 1.5, c = 1, height = 2.5) {
+  // Same as hyperboloid1 but a=b (rotation symmetric)
+  const g = makeHyperboloid1(a, a, c, height);
+  return g;
+}
+
+// ==================== CURVE GENERATORS ====================
+
+function makeHelix() {
+  const points = [];
+  const R = 1.5, c = 0.4, turns = 5;
+  for (let i = 0; i <= 500; i++) {
+    const t = turns * 2 * Math.PI * i / 500;
+    points.push(new THREE.Vector3(R * Math.cos(t), c * t - turns * Math.PI * c, R * Math.sin(t)));
+  }
+  return points;
+}
+
+function makeVivianiCurve() {
+  const points = [];
+  const R = 2;
+  for (let i = 0; i <= 500; i++) {
+    const t = 2 * Math.PI * i / 500;
+    const x = R * (1 + Math.cos(t)) / 2;
+    const y = R * Math.sin(t) / 2;
+    const z = Math.sqrt(R * R - x * x - y * y);
+    points.push(new THREE.Vector3(x, z, y));
+  }
+  return points;
+}
+
+function makeConicSpiral() {
+  const points = [];
+  const turns = 5;
+  for (let i = 0; i <= 500; i++) {
+    const t = turns * 2 * Math.PI * i / 500;
+    const r = t / (turns * 2 * Math.PI) * 2;
+    points.push(new THREE.Vector3(r * Math.cos(t), r - 1, r * Math.sin(t)));
+  }
+  return points;
+}
+
+function makeSphereCylinderIntersection() {
+  const group = new THREE.Group();
+  // Sphere
+  const sphereGeo = new THREE.SphereGeometry(2, 60, 40);
+  const sphereMesh = createSurface(sphereGeo, 0x3366cc, 0.3);
+  group.add(sphereMesh);
+
+  // Cylinder x²+y²=Rx → (x-R/2)²+y²=(R/2)²
+  const cylGeo = new THREE.CylinderGeometry(1, 1, 5, 60, 1, true);
+  cylGeo.rotateX(Math.PI / 2);
+  cylGeo.translate(1, 0, 0);
+  const cylMesh = createSurface(cylGeo, 0xff6633, 0.4);
+  group.add(cylMesh);
+
+  // Viviani curve on intersection
+  const curvePoints = makeVivianiCurve();
+  const tube = createTubeCurve(curvePoints, 0xffdd00, 0.06);
+  group.add(tube);
+
+  return group;
+}
+
+function makeParaboloidPlaneCut() {
+  const group = new THREE.Group();
+  // Paraboloid
+  const paraGeo = makeEllipticParaboloid(1.5, 1.5, 3);
+  const paraMesh = createSurface(paraGeo, 0x4488ff, 0.5);
+  group.add(paraMesh);
+
+  // Cutting plane z = 2
+  const planeGeo = new THREE.PlaneGeometry(5, 5);
+  planeGeo.translate(0, 0, 0);
+  const planeMesh = new THREE.Mesh(planeGeo,
+    new THREE.MeshBasicMaterial({ color: 0xff6644, transparent: true, opacity: 0.5, side: THREE.DoubleSide })
+  );
+  planeMesh.position.y = 2;
+  planeMesh.rotation.x = -Math.PI / 2;
+  group.add(planeMesh);
+
+  // Intersection circle
+  const circlePoints = [];
+  for (let i = 0; i <= 200; i++) {
+    const theta = 2 * Math.PI * i / 200;
+    const r = Math.sqrt(2);
+    circlePoints.push(new THREE.Vector3(1.5 * r * Math.cos(theta), 2, 1.5 * r * Math.sin(theta)));
+  }
+  const tube = createTubeCurve(circlePoints, 0xffdd00, 0.06);
+  group.add(tube);
+
+  return group;
+}
+
+// ==================== SWITCH SURFACE ====================
+
+const surfaceData = {
+  'ellipsoid': { title: '椭球面', eq: 'x²/a² + y²/b² + z²/c² = 1', color: 0x4488ff },
+  'hyperboloid1': { title: '单叶双曲面', eq: 'x²/a² + y²/b² − z²/c² = 1', color: 0x44cc88 },
+  'hyperboloid2': { title: '双叶双曲面', eq: 'x²/a² − y²/b² − z²/c² = 1', color: 0xcc6644 },
+  'elliptic-paraboloid': { title: '椭圆抛物面', eq: 'z = x²/a² + y²/b²', color: 0x6688ee },
+  'hyperbolic-paraboloid': { title: '双曲抛物面(马鞍面)', eq: 'z = x²/a² − y²/b²', color: 0x9966cc },
+  'cone': { title: '圆锥面', eq: 'z² = x² + y²', color: 0xff8844 },
+  'cylinder': { title: '圆柱面', eq: 'x² + y² = R²', color: 0x55aadd },
+  'parabolic-cylinder': { title: '抛物柱面', eq: 'y² = 2px', color: 0x88bb44 },
+  'hyperbolic-cylinder': { title: '双曲柱面', eq: 'x²/a² − y²/b² = 1', color: 0xdd8844 },
+  'torus': { title: '环面', eq: '(√(x²+y²) − R)² + z² = r²', color: 0xee88aa },
+  'rotating-hyperboloid': { title: '旋转单叶双曲面', eq: '(x²+y²)/a² − z²/c² = 1', color: 0x44ddcc },
+  'helix': { title: '圆柱螺旋线', eq: 'x=Rcos t, y=Rsin t, z=ct', color: 0xffdd44 },
+  'viviani': { title: '维维亚尼曲线', eq: '球面与圆柱面交线', color: 0xffaa00 },
+  'conic-spiral': { title: '圆锥螺旋线', eq: 'x=tcos t, y=tsin t, z=t', color: 0xddff44 },
+  'sphere-cylinder': { title: '球面与圆柱面交线', eq: 'x²+y²+z²=R² ∩ (x−R/2)²+y²=(R/2)²', color: 0x3366cc },
+  'paraboloid-cone': { title: '抛物面+截面', eq: 'z=x²+y², z=k', color: 0x4488ff },
+};
+
+function switchSurface(id) {
+  // Clear current
+  while(currentGroup.children.length > 0) {
+    currentGroup.remove(currentGroup.children[0]);
+  }
+
+  currentId = id;
+  const data = surfaceData[id];
+  document.getElementById('info-title').textContent = data.title;
+  document.getElementById('info-eq').textContent = data.eq;
+
+  let obj;
+  switch(id) {
+    case 'ellipsoid': obj = createSurface(makeEllipsoid(2, 1.5, 1), 0x4488ff); break;
+    case 'hyperboloid1': obj = createSurface(makeHyperboloid1(1.5, 1.5, 1, 2.5), 0x44cc88); break;
+    case 'hyperboloid2': obj = makeHyperboloid2(1.5, 1.5, 1); break;
+    case 'elliptic-paraboloid': obj = createSurface(makeEllipticParaboloid(1.5, 1.2, 3), 0x6688ee); break;
+    case 'hyperbolic-paraboloid': obj = createSurface(makeHyperbolicParaboloid(2.5), 0x9966cc); break;
+    case 'cone': obj = makeCone(3, 2); break;
+    case 'cylinder': obj = createSurface(makeCylinder(1.5, 4), 0x55aadd); break;
+    case 'parabolic-cylinder': obj = createSurface(makeParabolicCylinder(3), 0x88bb44); break;
+    case 'hyperbolic-cylinder': obj = createSurface(makeHyperbolicCylinder(3, 3), 0xdd8844); break;
+    case 'torus': obj = createSurface(makeTorus(2, 0.6), 0xee88aa); break;
+    case 'rotating-hyperboloid': obj = createSurface(makeRotatingHyperboloid(1.5, 1, 2.5), 0x44ddcc); break;
+    case 'helix': obj = createTubeCurve(makeHelix(), 0xffdd44, 0.06); break;
+    case 'viviani': obj = createTubeCurve(makeVivianiCurve(), 0xffaa00, 0.06); break;
+    case 'conic-spiral': obj = createTubeCurve(makeConicSpiral(), 0xddff44, 0.06); break;
+    case 'sphere-cylinder': obj = makeSphereCylinderIntersection(); break;
+    case 'paraboloid-cone': obj = makeParaboloidPlaneCut(); break;
+    default: obj = createSurface(makeEllipsoid(2, 1.5, 1), 0x4488ff);
+  }
+
+  if (obj instanceof THREE.Group) {
+    currentGroup.add(...obj.children);
+  } else {
+    currentGroup.add(obj);
+  }
+
+  // Update active button
+  document.querySelectorAll('.surface-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`[data-id="${id}"]`)?.classList.add('active');
+
+  // Reset camera for curves
+  if (['helix', 'viviani', 'conic-spiral'].includes(id)) {
+    camera.position.set(4, 2, 6);
+  } else {
+    camera.position.set(6, 3.5, 8);
+  }
+  controls.target.set(0, 0, 0);
+  controls.update();
+}
+
+// Button click handlers
+document.querySelectorAll('.surface-btn').forEach(btn => {
+  btn.addEventListener('click', () => switchSurface(btn.dataset.id));
+});
+
+// Sidebar toggle for mobile
+window.toggleSidebar = function() {
+  document.getElementById('sidebar').classList.toggle('open');
+};
+
+// Close sidebar when clicking on canvas on mobile
+renderer.domElement.addEventListener('click', () => {
+  if (window.innerWidth <= 600) {
+    document.getElementById('sidebar').classList.remove('open');
+  }
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  const ids = Object.keys(surfaceData);
+  const idx = ids.indexOf(currentId);
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+    e.preventDefault();
+    const next = (idx + 1) % ids.length;
+    switchSurface(ids[next]);
+  } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+    e.preventDefault();
+    const prev = (idx - 1 + ids.length) % ids.length;
+    switchSurface(ids[prev]);
+  }
+});
+
+// Animation loop
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+// Handle resize
+window.addEventListener('resize', () => {
+  camera.aspect = container.clientWidth / container.clientHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(container.clientWidth, container.clientHeight);
+});
+
+// Start with ellipsoid
+switchSurface('ellipsoid');
+animate();
+
+// Show hint
+setTimeout(() => {
+  const toast = document.createElement('div');
+  toast.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:50;background:rgba(0,0,0,0.8);color:#fff;padding:12px 24px;border-radius:20px;font-size:0.9em;pointer-events:none;transition:opacity 1s;';
+  toast.textContent = '🖱 拖拽旋转 | 滚轮缩放 | ← → 键切换曲面';
+  document.body.appendChild(toast);
+  setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 1000); }, 3000);
+}, 500);
+
+console.log('🚀 高等数学立体曲面3D展示已就绪');
+console.log('  🖱 鼠标拖拽旋转 | 滚轮缩放 | 右键平移');
+console.log('  ⌨ 左右箭头键切换曲面');
+console.log('  📱 支持触屏手势');
+</script>
+</body>
+</html>
