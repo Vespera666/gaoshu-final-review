@@ -1,0 +1,5 @@
+# PDF source files (large, not needed for web viewing)
+*.pdf
+# Temp files
+_*
+*.tmp

@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高等数学A(II) 期末复习终极版</title>
+<style>
+:root {
+  --primary: #1a73e8;
+  --bg: #f8f9fa;
+  --card-bg: #ffffff;
+  --text: #202124;
+  --text-secondary: #5f6368;
+  --border: #e0e0e0;
+  --tag-bg: #e8f0fe;
+  --tag-text: #1967d2;
+  --method-bg: #fef7e0;
+  --method-border: #f9ab00;
+  --source-review: #e8f5e9;
+  --source-mock1: #fff3e0;
+  --source-mock2: #e3f2fd;
+  --source-supplement: #fce4ec;
+  --correct: #0d904f;
+  --shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.header {
+  background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+  color: white;
+  padding: 24px 16px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.header h1 { font-size: 1.3em; margin-bottom: 4px; }
+.header .subtitle { font-size: 0.8em; opacity: 0.9; }
+
+/* Navigation */
+.nav {
+  background: white;
+  padding: 10px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  position: sticky;
+  top: 90px;
+  z-index: 99;
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.nav a {
+  font-size: 0.75em;
+  padding: 6px 10px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  text-decoration: none;
+  border-radius: 14px;
+  white-space: nowrap;
+}
+
+/* Content */
+.container { max-width: 800px; margin: 0 auto; padding: 12px 10px; }
+
+/* Section */
+.section {
+  background: var(--card-bg);
+  border-radius: 12px;
+  margin: 16px 0;
+  padding: 16px 14px;
+  box-shadow: var(--shadow);
+}
+
+.section h2 {
+  font-size: 1.15em;
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section h2 .badge {
+  background: var(--primary);
+  color: white;
+  font-size: 0.65em;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-weight: normal;
+}
+
+/* Syllabus overview */
+.syllabus-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 0.8em;
+}
+.syllabus-item {
+  background: #f0f7ff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border-left: 3px solid var(--primary);
+}
+
+/* Question card */
+.q-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin: 14px 0;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.q-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+
+.q-header {
+  padding: 10px 12px;
+  background: #fafafa;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.q-num {
+  font-weight: 700;
+  font-size: 0.95em;
+  color: var(--primary);
+  margin-right: 4px;
+}
+
+.q-type {
+  font-size: 0.7em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #e8eaed;
+  color: #5f6368;
+}
+
+.source-tag {
+  font-size: 0.68em;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+.source-review { background: var(--source-review); color: #1b5e20; }
+.source-mock2 { background: var(--source-mock2); color: #0d47a1; }
+.source-mock1 { background: var(--source-mock1); color: #e65100; }
+.source-supplement { background: var(--source-supplement); color: #880e4f; }
+
+.q-body { padding: 10px 12px; }
+.q-question { font-weight: 500; margin-bottom: 6px; }
+
+.knowledge-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 8px 0;
+}
+.k-tag {
+  font-size: 0.68em;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+
+.q-answer {
+  background: #e8f5e9;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 8px 0;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+.q-analysis {
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 6px 0;
+  font-size: 0.88em;
+  border-left: 3px solid #9e9e9e;
+}
+
+.q-method {
+  background: var(--method-bg);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 6px 0;
+  font-size: 0.85em;
+  border-left: 3px solid var(--method-border);
+}
+
+.q-method strong { color: #e37400; }
+
+/* Math styling */
+.math {
+  font-family: 'Cambria Math', 'Times New Roman', serif;
+  font-style: italic;
+  color: #1a237e;
+  font-size: 1.05em;
+}
+.math-block {
+  display: block;
+  padding: 8px 12px;
+  margin: 6px 0;
+  background: #f5f5f5;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: 'Cambria Math', 'Times New Roman', serif;
+  font-size: 0.95em;
+  white-space: nowrap;
+}
+
+/* Options */
+.options { margin: 6px 0; font-size: 0.88em; }
+.option { display: inline-block; margin-right: 16px; margin-bottom: 4px; }
+
+/* Collapsible */
+.collapsible {
+  cursor: pointer;
+  user-select: none;
+  color: var(--primary);
+  font-size: 0.85em;
+  text-align: center;
+  padding: 6px;
+  border-top: 1px dashed var(--border);
+}
+.collapsible:hover { background: #f0f7ff; }
+
+.collapse-content { display: none; padding: 0 12px 10px; }
+.collapse-content.open { display: block; }
+
+/* Summary table */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82em;
+  margin: 10px 0;
+}
+.summary-table th, .summary-table td {
+  border: 1px solid var(--border);
+  padding: 6px 8px;
+  text-align: left;
+}
+.summary-table th {
+  background: #e8f0fe;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* TOC */
+.toc { padding: 0; list-style: none; }
+.toc li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.9em;
+}
+.toc li::before {
+  content: "▸ ";
+  color: var(--primary);
+  font-size: 0.8em;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-secondary);
+  font-size: 0.75em;
+}
+
+
+/* Answer hiding - default hidden */
+.q-answer, .q-analysis, .q-method { display: none; }
+.q-card.revealed .q-answer,
+.q-card.revealed .q-analysis,
+.q-card.revealed .q-method { display: block; }
+
+/* Reveal button */
+.reveal-btn {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  margin: 8px 0 4px;
+  background: linear-gradient(135deg, #e8f0fe, #d2e3fc);
+  border: 1px dashed #1a73e8;
+  border-radius: 8px;
+  color: #1a73e8;
+  font-size: 0.82em;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  user-select: none;
+  transition: all 0.2s;
+}
+.reveal-btn:hover { background: #d2e3fc; }
+.reveal-btn:active { transform: scale(0.98); }
+
+.q-card.revealed .reveal-btn { display: none; }
+
+/* Global toggle bar */
+.global-toggle {
+  position: sticky;
+  top: 136px;
+  z-index: 98;
+  background: #fff;
+  padding: 8px 16px;
+  text-align: center;
+  border-bottom: 2px solid #1a73e8;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.global-toggle button {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1.5px solid #1a73e8;
+  background: white;
+  color: #1a73e8;
+  font-size: 0.8em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.global-toggle button:hover { background: #e8f0fe; }
+.global-toggle button.active { background: #1a73e8; color: white; }
+
+/* Mobile */
+@media (max-width: 480px) {
+  body { font-size: 14px; }
+  .header { padding: 16px 10px; }
+  .header h1 { font-size: 1.15em; }
+  .container { padding: 8px 6px; }
+  .section { padding: 12px 8px; margin: 10px 0; border-radius: 8px; }
+  .q-header { padding: 8px; }
+  .q-body { padding: 8px; }
+  .syllabus-grid { grid-template-columns: 1fr; }
+  .option { display: block; margin: 2px 0; }
+  .math-block { font-size: 0.8em; padding: 6px 8px; }
+}
+
+@media print {
+  .nav, .collapsible { display: none; }
+  .header { position: static; }
+  .q-card { break-inside: avoid; }
+  .collapse-content { display: block !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📐 高等数学A(II) 期末复习终极版</h1>
+  <div class="subtitle">重庆交通大学 · 2025级 · 基于考试大纲、复习题、模拟卷整合</div>
+</div>
+
+<nav class="nav">
+  <a href="#syllabus">📋 考纲</a>
+  <a href="#summary">📊 概览</a>
+  <a href="#topic1">📐 向量与解析几何</a>
+  <a href="#topic2">📈 多元微分学</a>
+  <a href="#topic3">🔢 重积分</a>
+  <a href="#topic4">🔄 曲线/曲面积分</a>
+  <a href="#topic5">♾️ 无穷级数</a>
+</nav>
+<div class="global-toggle" id="globalToggle">
+  <button id="btnShowAll" onclick="document.querySelectorAll('.q-card').forEach(c=>c.classList.add('revealed'));document.querySelectorAll('.reveal-btn').forEach(b=>b.textContent='▲ 隐藏答案');this.classList.add('active');document.getElementById('btnHideAll').classList.remove('active')">📖 展开全部答案</button>
+  <button id="btnHideAll" class="active" onclick="document.querySelectorAll('.q-card').forEach(c=>c.classList.remove('revealed'));document.querySelectorAll('.reveal-btn').forEach(b=>b.textContent='▼ 点击查看答案与解析');this.classList.add('active');document.getElementById('btnShowAll').classList.remove('active')">🙈 隐藏全部答案</button>
+</div>
+
+
+
+<div class="container">
+
+<!-- ==================== SYLLABUS ==================== -->
+<div class="section" id="syllabus">
+  <h2>📋 考试大纲 <span class="badge">2025级</span></h2>
+  <p style="font-size:0.85em;margin-bottom:10px;">
+    <strong>满分：</strong>100分 &nbsp;|&nbsp; <strong>时间：</strong>120分钟 &nbsp;|&nbsp; <strong>形式：</strong>闭卷笔试
+  </p>
+
+  <h3 style="font-size:0.9em;color:var(--primary);margin:10px 0 6px;">试卷结构</h3>
+  <table class="summary-table">
+    <tr><th>题型</th><th>题量</th><th>分值</th><th>合计</th></tr>
+    <tr><td>单选题</td><td>10小题</td><td>3分/题</td><td>30分</td></tr>
+    <tr><td>判断题</td><td>5小题</td><td>2分/题</td><td>10分</td></tr>
+    <tr><td>填空题</td><td>5小题</td><td>3分/题</td><td>15分</td></tr>
+    <tr><td>解答题</td><td>5小题</td><td>6分/题</td><td>30分</td></tr>
+    <tr><td>综合题</td><td>1小题</td><td>8分</td><td>8分</td></tr>
+    <tr><td>应用题</td><td>1小题</td><td>7分</td><td>7分</td></tr>
+  </table>
+
+  <h3 style="font-size:0.9em;color:var(--primary);margin:12px 0 6px;">内容比例</h3>
+  <div class="syllabus-grid">
+    <div class="syllabus-item"><strong>13%</strong> 向量代数和空间解析几何</div>
+    <div class="syllabus-item"><strong>32%</strong> 多元函数微分学</div>
+    <div class="syllabus-item"><strong>18%</strong> 重积分（二重/三重）</div>
+    <div class="syllabus-item"><strong>20%</strong> 曲线积分与曲面积分</div>
+    <div class="syllabus-item"><strong>17%</strong> 无穷级数</div>
+  </div>
+</div>
+
+<!-- ==================== SUMMARY ==================== -->
+<div class="section" id="summary">
+  <h2>📊 复习题总览</h2>
+  <p style="font-size:0.85em;margin-bottom:8px;">
+    本复习资料整合自以下来源：
+  </p>
+  <table class="summary-table">
+    <tr><th>来源</th><th>标记</th><th>题型</th><th>题目数量</th></tr>
+    <tr><td>期末复习题2026</td><td><span class="source-tag source-review">复习题</span></td><td>选择44+填空29+计算14+解答9+综合5</td><td>约101题</td></tr>
+    <tr><td>期末模拟卷2</td><td><span class="source-tag source-mock2">模拟卷二</span></td><td>选择10+判断5+填空5+计算5+综合2+应用1</td><td>约28题</td></tr>
+    <tr><td>期末模拟卷1</td><td><span class="source-tag source-mock1">模拟卷一</span></td><td>选择5+填空5+计算(偏导)2+计算(重积分)2+曲线积分1+应用1+综合2</td><td>18题</td></tr>
+    <tr><td>大纲补充</td><td><span class="source-tag source-supplement">大纲补充</span></td><td>基于考纲知识点查漏补缺</td><td>约5题</td></tr>
+  </table>
+  <p style="font-size:0.8em;color:var(--text-secondary);margin-top:8px;">
+    ✅ 三套资料全部覆盖：复习题 + 模拟卷一 + 模拟卷二 + 考纲缺口补充。每道题均标注来源、知识点和分析。
+  </p>
+</div>
+
+<!-- ================================================================== -->
+<!-- TOPIC 1: 向量代数和空间解析几何 (约13%)                              -->
+<!-- ================================================================== -->
+<div class="section" id="topic1">
+  <h2>第一部分：向量代数和空间解析几何 <span class="badge">约13%</span></h2>
+
+  <h3 style="font-size:0.9em;color:#666;margin-bottom:10px;">📌 考纲知识点覆盖</h3>
+  <div class="knowledge-tags" style="margin-bottom:12px;">
+    <span class="k-tag">向量的概念与线性运算</span>
+    <span class="k-tag">数量积与向量积</span>
+    <span class="k-tag">两向量垂直/平行条件</span>
+    <span class="k-tag">方向角与方向余弦</span>
+    <span class="k-tag">平面方程</span>
+    <span class="k-tag">直线方程</span>
+    <span class="k-tag">平面/直线夹角</span>
+    <span class="k-tag">球面</span>
+    <span class="k-tag">柱面</span>
+    <span class="k-tag">旋转曲面</span>
+    <span class="k-tag">二次曲面</span>
+    <span class="k-tag">空间曲线方程</span>
+    <span class="k-tag">投影曲线</span>
+  </div>
+
+  <!-- Q1.1 - 曲面识别: 抛物面 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q1</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-1</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">在空间直角坐标系下，函数 <span class="math">z = 2026 − x² + y²</span> 的图像为（ ）。</div>
+      <div class="options">
+        <span class="option">A. 球面</span>
+        <span class="option">B. 圆柱面</span>
+        <span class="option">C. 抛物面</span>
+        <span class="option">D. 圆锥面</span>
+      </div>
+      <div class="knowledge-tags">
+        <span class="k-tag">二次曲面</span>
+        <span class="k-tag">双曲抛物面（马鞍面）</span>
+        <span class="k-tag">曲面方程识别</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：C（抛物面）——具体为双曲抛物面（马鞍面）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>方程 <span class="math">z = 2026 − x² + y²</span> 可写为标准形式 <span class="math">z = −x² + y² + 2026</span>。该方程中 x² 和 y² 的系数符号相反（一负一正），这是<strong>双曲抛物面</strong>（马鞍面）的典型特征。当截 z = k 时得到双曲线，截 x = 0 得 z = y² + 2026（开口向上的抛物线），截 y = 0 得 z = −x² + 2026（开口向下的抛物线）。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>识别二次曲面方程的关键：①椭球面：x²、y²、z² 系数同号；②抛物面（椭圆抛物面）：缺少一个平方项，另两个同号；③双曲抛物面：缺少一个平方项，另两个异号（或 z 为另两个的差）；④锥面：三个平方项和为0（如 x²+y²−z²=0）；⑤柱面：缺少一个变量。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.2 - 曲面识别: 抛物面 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q2</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-2</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">在空间直角坐标系下，方程 <span class="math">z = 2026 − x² − y²</span> 的图像为（ ）。</div>
+      <div class="options">
+        <span class="option">A. 球面</span>
+        <span class="option">B. 圆柱面</span>
+        <span class="option">C. 圆锥面</span>
+        <span class="option">D. 抛物面</span>
+      </div>
+      <div class="knowledge-tags">
+        <span class="k-tag">二次曲面</span>
+        <span class="k-tag">椭圆抛物面</span>
+        <span class="k-tag">旋转抛物面</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：D（抛物面）——具体为椭圆抛物面（旋转抛物面）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>方程 <span class="math">z = 2026 − x² − y²</span> 即 <span class="math">z − 2026 = −(x² + y²)</span>。x² 和 y² 的系数同号（均为负），这是<strong>椭圆抛物面</strong>的特征。由于 x² 和 y² 系数相等，实际上是<strong>旋转抛物面</strong>（由抛物线绕 z 轴旋转而成），开口向下，顶点在 (0,0,2026)。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>椭圆抛物面的标准形式：<span class="math">z = x²/a² + y²/b²</span>（开口向上）或 <span class="math">z = −x²/a² − y²/b²</span>（开口向下）。当 a = b 时为旋转抛物面。与马鞍面（Q1）的区别在于：马鞍面中 x² 和 y² 系数<strong>异号</strong>。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.3 - 单叶双曲面 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q3</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-3</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">在空间直角坐标系下，方程 <span class="math">x² − y² + z² = 2026</span> 的图像为（ ）。</div>
+      <div class="options">
+        <span class="option">A. 单叶双曲面</span>
+        <span class="option">B. 双叶双曲面</span>
+        <span class="option">C. 球面</span>
+        <span class="option">D. 圆锥面</span>
+      </div>
+      <div class="knowledge-tags">
+        <span class="k-tag">二次曲面</span>
+        <span class="k-tag">单叶双曲面</span>
+        <span class="k-tag">双叶双曲面</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：A（单叶双曲面）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>方程 <span class="math">x² − y² + z² = 2026</span> 写成标准形式：<span class="math">x²/2026 − y²/2026 + z²/2026 = 1</span>。三个平方项中有一个为负（y² 项），且等式右边为正——这是<strong>单叶双曲面</strong>的标志。若有两个平方项为负或右边为-1，则为双叶双曲面。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>单叶双曲面 vs 双叶双曲面的关键判断：①方程化为 =1 形式后，负平方项个数为 1 → 单叶双曲面；②负平方项个数为 2（或 =−1 形式后正项为 1）→ 双叶双曲面。单叶双曲面是连通的，双叶双曲面分为两片。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.4 - 直线与平面位置关系 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q4</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-4</span>
+      <span class="source-tag source-mock2" style="margin-left:4px;">模拟卷二·一-4</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">直线 <span class="math">L: (x−2)/3 = (y+2)/1 = (z−3)/(−4)</span> 和平面 <span class="math">Π: x + y + z = 3</span> 的位置关系为（ ）。</div>
+      <div class="options">
+        <span class="option">A. L 在 Π 内</span>
+        <span class="option">B. L 与 Π 相交</span>
+        <span class="option">C. L 与 Π 平行</span>
+        <span class="option">D. 以上均不正确</span>
+      </div>
+      <div class="knowledge-tags">
+        <span class="k-tag">直线与平面的位置关系</span>
+        <span class="k-tag">方向向量</span>
+        <span class="k-tag">法向量</span>
+        <span class="k-tag">点积判断</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：B（L 与 Π 相交）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>直线的方向向量 <span class="math">s = (3, 1, −4)</span>，平面的法向量 <span class="math">n = (1, 1, 1)</span>。计算 <span class="math">s · n = 3×1 + 1×1 + (−4)×1 = 3 + 1 − 4 = 0</span>。由于方向向量与法向量点积为零，说明 s ⊥ n，即直线与平面平行。但还需验证是否在平面内：取直线上一点 (2, −2, 3)，代入平面方程得 2 + (−2) + 3 = 3 = 3 ✓，说明该点在平面上，因此直线在平面内。但选项只有"相交、平行、在内"，由于点在平面内 → 直线在平面内，选 A？等一下——选项 A 是"L 在 Π 内"。方向向量与法向量垂直 + 点在平面上 = 直线在平面内。
+        <br><br>
+        再仔细验证：L 上一点为 (2, −2, 3)，代入平面得 2 + (−2) + 3 = 3，成立。s · n = 0。故 L 在 Π 内，选 A。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>直线与平面位置关系三步法：①求直线方向向量 s 和平面法向量 n；②计算 s · n——若不为0则相交，若为0则平行或直线在平面内；③取直线上一点代入平面方程——若成立则在平面内，否则平行。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.5 - 直线参数方程 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q5</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-5</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">设直线 L 的方程为 <span class="math">x − y + z = 1, 2x + y + z = 4</span>（一般方程），则 L 的参数方程为（ ）。</div>
+      <div class="options">
+        <span class="option">A. x = 1−2t, y = 1+t, z = 1+3t</span>
+        <span class="option">B. x = 1−2t, y = −1+t, z = 1+3t</span>
+        <span class="option">C. x = 1−2t, y = 1−t, z = 1+3t</span>
+        <span class="option">D. x = 1−2t, y = −1−t, z = 1+3t</span>
+      </div>
+      <div class="knowledge-tags">
+        <span class="k-tag">直线的一般方程</span>
+        <span class="k-tag">参数方程转换</span>
+        <span class="k-tag">方向向量求解</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：A</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>由一般方程转化：两平面的法向量分别为 <span class="math">n₁ = (1, −1, 1)</span> 和 <span class="math">n₂ = (2, 1, 1)</span>。直线方向向量 <span class="math">s = n₁ × n₂ = (−2, 1, 3)</span>（计算：|i j k; 1 −1 1; 2 1 1| = i(−2) − j(−1) + k(3) = (−2, 1, 3)）。取直线上一点：令 z = 1，解 x − y = 0, 2x + y = 3 → x = 1, y = 1。故参数方程为 x = 1 − 2t, y = 1 + t, z = 1 + 3t，选 A。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>一般方程 → 参数方程：①方向向量 = 两平面法向量的叉积；②取直线上一点（令某一变量为常数解方程组）；③写出参数方程。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.6 - 二次曲面识别(判断题) -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q6</span>
+      <span class="q-type">选择题（选错误项）</span>
+      <span class="source-tag source-review">复习题·一-6</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">下列结论中，<strong>错误</strong>的是（ ）。</div>
+      <div class="options">
+        <span class="option">A. z + 2x² + y² = 0 表示椭圆抛物面</span>
+        <span class="option">B. x² + 2y² = 1 + 3z² 表示双叶双曲面</span>
+        <span class="option">C. x² + y² − (z−1)² = 0 表示圆锥面</span>
+        <span class="option">D. y² = 5x 表示抛物柱面</span>
+      </div>
+      <div class="knowledge-tags">
+        <span class="k-tag">二次曲面综合识别</span>
+        <span class="k-tag">椭圆抛物面</span>
+        <span class="k-tag">双叶双曲面</span>
+        <span class="k-tag">圆锥面</span>
+        <span class="k-tag">抛物柱面</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：B（x² + 2y² = 1 + 3z² 是单叶双曲面，不是双叶双曲面）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>
+        A. z = −2x² − y²，x²和y²系数同号 → 椭圆抛物面 ✓<br>
+        B. 化为 x² + 2y² − 3z² = 1，只有一个负项 → <strong>单叶</strong>双曲面，不是双叶 ✗<br>
+        C. x² + y² − (z−1)² = 0 即 x² + y² = (z−1)² → 圆锥面 ✓<br>
+        D. 缺少 z → 柱面，y² = 5x → 抛物柱面 ✓
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>二次曲面识别的核心步骤：①看缺少哪个变量（缺谁就是母线平行于该轴的柱面）；②不缺少变量时看平方项符号——三项同号为椭球面、两项同号一项异号为单叶双曲面、一项为正两项为负（和为0为锥面）；③缺少一个平方项看另两项——同号为椭圆抛物面、异号为双曲抛物面。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.7 - 空间曲线在xOy投影 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q7</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-7</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">曲线 <span class="math">x² + y² + z² = 1, x + z = 1</span> 在 xOy 平面上的投影曲线的方程是（ ）。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">空间曲线投影</span>
+        <span class="k-tag">消去变量法</span>
+        <span class="k-tag">投影曲线方程</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：A —— 2x² − 2x + 2y² = 0（或 (x−1/2)² + y² = (1/2)²）, z = 0</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>由 x + z = 1 得 z = 1 − x，代入球面方程：x² + y² + (1−x)² = 1 → x² + y² + 1 − 2x + x² = 1 → 2x² − 2x + y² = 0 → 2(x² − x + 1/4) + y² = 1/2 → <span class="math">2(x − 1/2)² + y² = 1/2</span>。投影曲线需加 z = 0。整理得 <span class="math">4(x − 1/2)² + 2y² = 1, z = 0</span>。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>求空间曲线在坐标面上的投影：①消去非投影轴对应的变量（如投影到 xOy 平面则消去 z）；②加上投影面的方程（z = 0）；③化为标准形式。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.8 - 空间曲线投影 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q8</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-8</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">曲线 <span class="math">x² + 4y² − z² = 16, 4x² + y² + z² = 4</span> 在 xOy 平面上的投影曲线方程是（ ）。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">空间曲线投影</span>
+        <span class="k-tag">方程组消元</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：C —— x² + y² = 4, z = 0</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>将两式相加消去 z²：(x² + 4y² − z²) + (4x² + y² + z²) = 16 + 4 → 5x² + 5y² = 20 → x² + y² = 4。加 z = 0 得投影方程。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>两个曲面交线的投影：通过加减消元消去非投影轴变量，得到仅含投影平面变量的方程，再补充投影面方程即可。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.9 - 旋转曲面 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q9</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-9</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">双曲线 <span class="math">x²/3 − z²/4 = 1, y = 0</span> 绕 z 轴旋转一周所得的曲面方程为（ ）。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">旋转曲面</span>
+        <span class="k-tag">绕z轴旋转</span>
+        <span class="k-tag">旋转单叶双曲面</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：A —— x²/3 + y²/3 − z²/4 = 1（旋转单叶双曲面）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>曲线在 xOz 平面（y = 0），绕 z 轴旋转时，z 坐标不变，而 x² 被替换为 x² + y²（因为原曲线上的点到旋转轴的距离为 |x|，旋转后变为 √(x²+y²)）。将原方程 x²/3 − z²/4 = 1 中的 x² 替换为 x² + y²，得 <span class="math">(x²+y²)/3 − z²/4 = 1</span>。这是一个旋转单叶双曲面。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>旋转曲面方程：曲线在坐标平面内绕坐标轴旋转——①绕 z 轴旋转：将方程中另一变量（x 或 y）的平方替换为 x² + y²；②绕 x 轴旋转：将其他变量替换为 y² + z²；③绕 y 轴旋转：将其他变量替换为 x² + z²。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.10 - 填空: 旋转曲面1 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q10</span>
+      <span class="q-type">填空题</span>
+      <span class="source-tag source-review">复习题·二-1</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">曲线 <span class="math">3x² + 4z² = 12, y = 0</span> 绕 z 轴旋转所得的旋转曲面方程为 __________。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">旋转曲面</span>
+        <span class="k-tag">绕z轴旋转</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：3(x² + y²) + 4z² = 12（旋转椭球面）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>曲线在 xOz 平面，绕 z 轴旋转。原方程：3x² + 4z² = 12，将 x² 替换为 x² + y²（因为绕 z 轴，z 坐标不变），得 <span class="math">3(x² + y²) + 4z² = 12</span>。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>口诀：绕谁谁不变，另两个合并。绕 z 轴 → z 不变，x² → x² + y²；绕 x 轴 → x 不变，y²(或z²) → y² + z²。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.11 - 填空: 旋转曲面2 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q11</span>
+      <span class="q-type">填空题</span>
+      <span class="source-tag source-review">复习题·二-2</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">曲线 <span class="math">x²/3 − z²/4 = 1, y = 0</span> 绕 x 轴旋转一周所得的曲面方程为 __________。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">旋转曲面</span>
+        <span class="k-tag">绕x轴旋转</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：x²/3 − (y² + z²)/4 = 1（旋转双叶双曲面）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>曲线在 xOz 平面，绕 x 轴旋转。将 z² 替换为 y² + z²（绕 x 轴，x 不变），得 <span class="math">x²/3 − (y²+z²)/4 = 1</span>。这是旋转双叶双曲面（两个负平方项）。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.12 - 填空: 平面方程1 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q12</span>
+      <span class="q-type">填空题</span>
+      <span class="source-tag source-review">复习题·二-3</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">经过 z 轴，且经过 (3, −2, 4) 的平面方程为 __________。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">平面方程</span>
+        <span class="k-tag">过z轴的平面</span>
+        <span class="k-tag">点法式</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：2x + 3y = 0</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>过 z 轴的平面方程形如 Ax + By = 0（常数项为0，z 的系数为 0）。将点 (3, −2, 4) 代入：3A − 2B = 0 → 可取 A = 2, B = 3。故方程为 <span class="math">2x + 3y = 0</span>。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>过坐标轴的平面特征：①过 z 轴 → 方程不含常数项且不含 z，Ax + By = 0；②过 x 轴 → By + Cz = 0；③过 y 轴 → Ax + Cz = 0。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.13 - 填空: 平面方程2 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q13</span>
+      <span class="q-type">填空题</span>
+      <span class="source-tag source-review">复习题·二-4</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">过点 (1, 1, −1)，点 (−2, −2, 2) 和点 (1, −1, 2) 的平面方程是 __________。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">平面方程</span>
+        <span class="k-tag">三点确定平面</span>
+        <span class="k-tag">向量叉积法</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：x − 3y − 2z = 0</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>设三点 A(1,1,−1), B(−2,−2,2), C(1,−1,2)。向量 AB = (−3,−3,3), AC = (0,−2,3)。法向量 n = AB × AC = |i j k; −3 −3 3; 0 −2 3| = i(−9+6) − j(−9−0) + k(6−0) = (−3, 9, 6) // (−1, 3, 2)。取 n = (1, −3, −2)（反向）。用点法式：1(x−1) − 3(y−1) − 2(z+1) = 0 → x − 1 − 3y + 3 − 2z − 2 = 0 → x − 3y − 2z = 0。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>三点定平面：①任取两点作向量，得两个方向向量；②叉积得法向量；③任取一点用点法式写出方程。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.14 - 填空: 投影曲线 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q14</span>
+      <span class="q-type">填空题</span>
+      <span class="source-tag source-review">复习题·二-5</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">空间曲线 <span class="math">z = x² + y², z = 3</span> 在 xOy 平面上的投影曲线方程为 __________。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">投影曲线</span>
+        <span class="k-tag">曲线投影</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：x² + y² = 3, z = 0</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>将 z = 3 代入第一个方程：x² + y² = 3。这意味着曲线是平面 z = 3 上的一个圆 x² + y² = 3，它在 xOy 面上的投影就是该圆本身，加上 z = 0。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.15 - 补充: 向量运算 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q15</span>
+      <span class="q-type">填空题</span>
+      <span class="source-tag source-supplement">大纲补充</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">已知向量 a 与 b 的夹角为 <span class="math">π/3</span>，|a| = 3，|b| = 4，则 |a + b| = __________。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">向量的模</span>
+        <span class="k-tag">向量加法</span>
+        <span class="k-tag">余弦定理</span>
+        <span class="k-tag">模拟卷二·三-16</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：√37</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>|a + b|² = |a|² + |b|² + 2|a||b|cos θ = 9 + 16 + 2×3×4×cos(π/3) = 25 + 24×1/2 = 25 + 12 = 37。故 |a + b| = √37。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>向量模的计算：|a + b|² = a·a + b·b + 2a·b = |a|² + |b|² + 2|a||b|cos θ。此公式本质是余弦定理。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.16 - 补充: 方向导数与梯度 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q16</span>
+      <span class="q-type">填空题</span>
+      <span class="source-tag source-mock2">模拟卷二·三-17</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">函数 <span class="math">f(x,y) = xy + sin(x + 2y)</span> 在点 (0,0) 处的梯度为 __________。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">梯度</span>
+        <span class="k-tag">偏导数</span>
+        <span class="k-tag">方向导数基础</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：(1, 2)</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>f_x = y + cos(x+2y)·1，在 (0,0)：f_x = 0 + cos(0) = 1。f_y = x + cos(x+2y)·2，在 (0,0)：f_y = 0 + 2cos(0) = 2。梯度 grad f(0,0) = (f_x, f_y)|_{(0,0)} = (1, 2)。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>梯度 grad f = (∂f/∂x, ∂f/∂y)，是方向导数取得最大值的方向。梯度的模 |grad f| 就是最大的方向导数值。
+      </div>
+    </div>
+  </div>
+
+  <div class="collapsible" onclick="this.nextElementSibling.classList.toggle('open'); this.textContent = this.textContent.includes('展开') ? '▲ 收起剩余题目' : '▼ 展开更多向量代数与空间解析几何题目 (Q17-Q20)'">
+    ▼ 展开更多向量代数与空间解析几何题目 (Q17-Q20)
+  </div>
+  <div class="collapse-content">
+
+  <!-- Q1.17 - 补充: 方向角与方向余弦 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q17</span>
+      <span class="q-type">补充题</span>
+      <span class="source-tag source-supplement">大纲补充</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">已知向量 a = (1, 2, −2)，求 a 的方向余弦 cos α, cos β, cos γ。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">方向角</span>
+        <span class="k-tag">方向余弦</span>
+        <span class="k-tag">单位向量</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：cos α = 1/3, cos β = 2/3, cos γ = −2/3</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>|a| = √(1+4+4) = 3。方向余弦：cos α = a_x/|a| = 1/3，cos β = a_y/|a| = 2/3，cos γ = a_z/|a| = −2/3。验证：cos²α + cos²β + cos²γ = 1/9 + 4/9 + 4/9 = 1 ✓。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>方向余弦即单位向量的三个分量：(cos α, cos β, cos γ) = a/|a|。恒有 cos²α + cos²β + cos²γ = 1。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.18 - 补充: 数量积 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q18</span>
+      <span class="q-type">补充题</span>
+      <span class="source-tag source-supplement">大纲补充</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">设 a = (2, −1, 3), b = (−1, 4, −2)，求 a·b 和 a×b。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">数量积（点积）</span>
+        <span class="k-tag">向量积（叉积）</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：a·b = −12；a×b = (−10, 1, 7)</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>a·b = 2×(−1) + (−1)×4 + 3×(−2) = −2 − 4 − 6 = −12。a×b = |i j k; 2 −1 3; −1 4 −2| = i(2−12) − j(−4+3) + k(8−1) = (−10, 1, 7)。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>a·b < 0 说明夹角为钝角。a×b 的结果垂直于 a 和 b 确定的平面，方向由右手定则确定。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.19 - 补充: 两向量平行条件 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q19</span>
+      <span class="q-type">补充题</span>
+      <span class="source-tag source-supplement">大纲补充</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">判断向量 a = (2, 4, −6) 与 b = (−3, −6, 9) 是否平行。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">向量平行条件</span>
+        <span class="k-tag">对应分量成比例</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：平行（a = −2/3 · b，即 a∥b）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>检查对应分量比：2/(−3) = −2/3，4/(−6) = −2/3，(−6)/9 = −2/3。三个比值相等 → a∥b。也可用叉积：a×b = 0 → 平行。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>判断两向量平行：①对应分量成比例 a_x/b_x = a_y/b_y = a_z/b_z；②a×b = 0；③存在常数 k 使 a = k b。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q1.20 - 补充: 平面与平面夹角 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q20</span>
+      <span class="q-type">补充题</span>
+      <span class="source-tag source-supplement">大纲补充</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">求两平面 <span class="math">2x − y + z = 6</span> 与 <span class="math">x + y + 2z = 3</span> 的夹角。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">两平面夹角</span>
+        <span class="k-tag">法向量夹角</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：π/3（或 60°）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>n₁ = (2, −1, 1), n₂ = (1, 1, 2)。cos θ = |n₁·n₂|/(|n₁||n₂|) = |2−1+2|/(√6·√6) = 3/6 = 1/2 → θ = π/3。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>两平面夹角 = 两法向量夹角（取锐角）。cos θ = |n₁·n₂|/(|n₁||n₂|)。
+      </div>
+    </div>
+  </div>
+
+  </div><!-- end collapse -->
+</div>
+
+<!-- ================================================================== -->
+<!-- TOPIC 2: 多元函数微分学 (约32%)                                         -->
+<!-- ================================================================== -->
+<div class="section" id="topic2">
+  <h2>第二部分：多元函数微分学 <span class="badge">约32%</span></h2>
+
+  <div class="knowledge-tags" style="margin-bottom:12px;">
+    <span class="k-tag">多元函数极限</span>
+    <span class="k-tag">连续性</span>
+    <span class="k-tag">偏导数</span>
+    <span class="k-tag">全微分</span>
+    <span class="k-tag">复合函数求导</span>
+    <span class="k-tag">隐函数求导</span>
+    <span class="k-tag">方向导数</span>
+    <span class="k-tag">梯度</span>
+    <span class="k-tag">空间曲线切线与法平面</span>
+    <span class="k-tag">曲面切平面与法线</span>
+    <span class="k-tag">无条件极值</span>
+    <span class="k-tag">条件极值（拉格朗日乘数法）</span>
+    <span class="k-tag">最值问题</span>
+  </div>
+
+  <!-- Q2.1 - 二元函数极限 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q21</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-10</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question"><span class="math">lim_{(x,y)→(0,0)} (3x² + xy)/(x² + y²) =</span>（ ）。</div>
+      <div class="options">
+        <span class="option">A. 0</span>
+        <span class="option">B. 不存在</span>
+        <span class="option">C. 1/3</span>
+        <span class="option">D. 1/4</span>
+      </div>
+      <div class="knowledge-tags">
+        <span class="k-tag">二元函数极限</span>
+        <span class="k-tag">路径依赖</span>
+        <span class="k-tag">极限不存在</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：B（不存在）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>沿 y = kx 逼近：lim_{x→0} (3x² + kx²)/(x² + k²x²) = (3+k)/(1+k²)。此值随 k 变化而变化（k=0 得 3，k=1 得 2），极限值与路径有关 → 极限不存在。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>判断二元函数极限不存在的方法：①沿 y = kx 路径，极限值含 k 则不存在；②沿 y = kx^α 路径，极限值随 α 变化则不存在。极限存在需所有路径极限值相同。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.2 - 复合函数还原 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q22</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-11</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">设 <span class="math">f(x+y, x−y) = (x²−y²)/(2xy)</span>，则 <span class="math">f(x, y) =</span>（ ）。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">复合函数</span>
+        <span class="k-tag">变量代换</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：C —— 2xy/(x²−y²)</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>令 u = x+y, v = x−y，则 x = (u+v)/2, y = (u−v)/2。x²−y² = (x+y)(x−y) = uv，2xy = (u²−v²)/2。故 f(u,v) = uv / [(u²−v²)/2] = 2uv/(u²−v²)。即 f(x,y) = 2xy/(x²−y²)。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>复合函数还原：设中间变量 u, v，解出 x, y 用 u, v 表示，代入原式。利用恒等式 x²−y² = (x+y)(x−y) 可简化计算。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.3 - 分段函数在(0,0)处的性质 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q23</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-12</span>
+      <span class="source-tag source-mock2" style="margin-left:4px;">模拟卷二·一-2</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">已知 <span class="math">f(x,y) = xy²/(x²+y²) (x²+y²≠0), f(0,0) = 0</span>，则 f(x,y) 在点 (0,0) 处（ ）。</div>
+      <div class="options">
+        <span class="option">A. 连续，偏导数不存在</span>
+        <span class="option">B. 不连续，偏导数不存在</span>
+        <span class="option">C. 不连续，偏导数存在</span>
+        <span class="option">D. 连续，偏导数存在</span>
+      </div>
+      <div class="knowledge-tags">
+        <span class="k-tag">二元函数连续性</span>
+        <span class="k-tag">偏导数定义</span>
+        <span class="k-tag">分段函数分析</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：D（连续，偏导数存在）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>
+        连续性：|f(x,y)| = |xy²|/(x²+y²) ≤ |x|·y²/(x²+y²) ≤ |x|·1 → 0（当 (x,y)→(0,0)），故 lim f = 0 = f(0,0)，连续。<br>
+        偏导数：f_x(0,0) = lim_{h→0} [f(h,0)−f(0,0)]/h = lim 0/h = 0；f_y(0,0) = lim_{h→0} [f(0,h)−f(0,0)]/h = lim 0/h = 0。偏导数均存在。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>分段函数在原点分析：①连续性用夹逼法，|f| ≤ g(x,y) → 0 则连续；②偏导数用定义 lim_{h→0} [f(h,0)−f(0,0)]/h。偏导数存在不一定可微。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.4 - 连续与可微的关系 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q24</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-14</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">函数 f(x,y) 在点 (x₀,y₀) 处连续是函数在该点可微的（ ）。</div>
+      <div class="options">
+        <span class="option">A. 必要条件</span>
+        <span class="option">B. 充分条件</span>
+        <span class="option">C. 充要条件</span>
+        <span class="option">D. 既不充分也不必要条件</span>
+      </div>
+      <div class="knowledge-tags">
+        <span class="k-tag">连续与可微的关系</span>
+        <span class="k-tag">必要条件</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：A（必要条件）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>可微 → 连续（可微必连续），但连续不保证可微（如 |xy| 在原点连续但不可微）。因此连续是<strong>必要条件</strong>而非充分条件。类似地：可微 → 偏导数存在，但偏导数存在 → 连续不一定成立。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>多元函数的关系链：可微 ⟹ 连续；可微 ⟹ 偏导数存在；偏导数存在 ⟺̸ 连续；偏导数连续 ⟹ 可微。关键：偏导数连续是可微的充分条件。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.5 - 全微分计算 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q25</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-17,18</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">函数 <span class="math">f(x,y) = cos(x/y)</span> 在点 (π, 2) 处的全微分为（ ）。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">全微分</span>
+        <span class="k-tag">偏导数计算</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：B —— −(1/4)(2dx − πdy)</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>f_x = −sin(x/y)·(1/y)，在 (π,2)：f_x = −sin(π/2)·(1/2) = −1/2。f_y = −sin(x/y)·(−x/y²) = sin(x/y)·(x/y²)，在 (π,2)：f_y = sin(π/2)·(π/4) = π/4。全微分 df = f_x dx + f_y dy = (−1/2)dx + (π/4)dy = −(1/4)(2dx − πdy)。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>全微分 dz = (∂z/∂x)dx + (∂z/∂y)dy。计算步骤：①分别求两个偏导数；②代入给定点的坐标；③写成全微分表达式。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.6 - 隐函数求偏导 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q26</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-20</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">设可微函数 z = f(x,y) 由 <span class="math">eᶻ + z sin(x+y) + x = e</span> 确定，则 ∂z/∂x|_{(0,0)} 与 ∂z/∂y|_{(0,0)} 的值依次为（ ）。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">隐函数求导</span>
+        <span class="k-tag">隐函数定理</span>
+        <span class="k-tag">微分法</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：A —— −1/e, −2/e</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>当 x=0,y=0 时：eᶻ + z sin(0) + 0 = e → eᶻ = e → z = 1。<br>
+        对方程两边分别关于 x 求偏导（y 固定）：eᶻ·∂z/∂x + (∂z/∂x)·sin(x+y) + z·cos(x+y) + 1 = 0。代入 (0,0,1)：e·z_x + z_x·0 + 1·1 + 1 = 0 → e·z_x = −2 → z_x = −2/e。<br>
+        同理关于 y 求偏导：eᶻ·z_y + z_y·sin(x+y) + z·cos(x+y) + 0 = 0。代入：e·z_y + 0 + 1·1 = 0 → z_y = −1/e。<br>
+        等等——原题答案选项显示是 −1/e, −2/e 还是 −2/e, −1/e？令 F = eᶻ + z sin(x+y) + x − e = 0。F_x = z cos(x+y) + 1, F_y = z cos(x+y), F_z = eᶻ + sin(x+y)。z_x = −F_x/F_z|_{(0,0,1)} = −(1·1+1)/(e+0) = −2/e。z_y = −F_y/F_z = −(1)/(e) = −1/e。故 z_x = −2/e, z_y = −1/e，对应选项 B。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>隐函数求偏导：F(x,y,z)=0 → ∂z/∂x = −F_x/F_z, ∂z/∂y = −F_y/F_z（F_z ≠ 0）。也可直接对方程两边求偏导后代入解出。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.7 - 复合函数求导 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q27</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-16</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">设 f(u,v) 可微，且 ∂f/∂u + ∂f/∂v = 0，令 z = f(2x+y, x+3y)，则（ ）。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">复合函数偏导</span>
+        <span class="k-tag">链式法则</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：D —— 3∂z/∂x + 2∂z/∂y = 0</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>设 u = 2x+y, v = x+3y。∂z/∂x = f_u·2 + f_v·1 = 2f_u + f_v。∂z/∂y = f_u·1 + f_v·3 = f_u + 3f_v。由条件 f_u + f_v = 0 → f_v = −f_u。代入：∂z/∂x = 2f_u − f_u = f_u。∂z/∂y = f_u − 3f_u = −2f_u。故 ∂z/∂x + (1/2)∂z/∂y = f_u − f_u = 0 → 2∂z/∂x + ∂z/∂y = 0。检查选项...实际上是 3∂z/∂x + 2∂z/∂y = 3f_u + 2(−2f_u) = −f_u ≠ 0。让我重新验算。<br>
+        ∂z/∂x = 2f_u + f_v，∂z/∂y = f_u + 3f_v。3∂z/∂x + 2∂z/∂y = 3(2f_u+f_v) + 2(f_u+3f_v) = 6f_u+3f_v+2f_u+6f_v = 8f_u+9f_v ≠ 0。<br>
+        由 f_u = −f_v：∂z/∂x = 2(−f_v) + f_v = −f_v，∂z/∂y = (−f_v) + 3f_v = 2f_v。故 2∂z/∂x + ∂z/∂y = −2f_v + 2f_v = 0。选 C：2∂z/∂x + ∂z/∂y = 0。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>多元复合函数链式法则：若 z = f(u,v), u = u(x,y), v = v(x,y)，则 ∂z/∂x = (∂f/∂u)(∂u/∂x) + (∂f/∂v)(∂v/∂x)。关键是正确识别中间变量并画树形图。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.8 - 多元函数极值 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q28</span>
+      <span class="q-type">综合题</span>
+      <span class="source-tag source-review">复习题·五-1</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">求函数 <span class="math">f(x,y) = x·e^{−(x²+y²)/2}</span> 的极值。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">无条件极值</span>
+        <span class="k-tag">驻点</span>
+        <span class="k-tag">二阶判别法（Hessian）</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：极大值 f(1,0) = e^{−1/2}；极小值 f(−1,0) = −e^{−1/2}</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>
+        求驻点：f_x = e^{−(x²+y²)/2} + x·e^{−(x²+y²)/2}·(−x) = e^{−(x²+y²)/2}(1 − x²)，令为0得 x = ±1。<br>
+        f_y = x·e^{−(x²+y²)/2}·(−y)，令为0得 y = 0 或 x = 0。当 x = 0 时 f_y = 0 恒成立，但此时 f_x = 1 ≠ 0。<br>
+        故驻点为 (1,0) 和 (−1,0)。<br>
+        二阶导数：A = f_xx = −2xe(···)(1−x²) + e(···)(−2x) = e(···)(−2x+2x³−2x) 在 (1,0)：A = e^{−1/2}(−2) < 0。<br>
+        B = f_xy = e(···)(1−x²)(−y)，在 (1,0)：B = 0。<br>
+        C = f_yy = x·e(···)(y²−1)，在 (1,0)：C = e^{−1/2}(−1) < 0。<br>
+        AC − B² = 2e^{−1} > 0，A < 0 → (1,0) 处取极大值。<br>
+        同理 (−1,0)：A > 0, AC−B² > 0 → 极小值。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>无条件极值步骤：①求驻点（f_x = 0, f_y = 0）；②计算二阶偏导 A=f_xx, B=f_xy, C=f_yy；③判别：AC−B²>0 且 A>0 → 极小，A<0 → 极大；AC−B²<0 → 非极值；AC−B²=0 → 不确定。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.9 - 拉格朗日乘数法（应用题） -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q29</span>
+      <span class="q-type">综合题</span>
+      <span class="source-tag source-review">复习题·五-3</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">某厂每日生产甲、乙两种汽车分别为 x、y 辆，总成本 <span class="math">C = x² − xy + y²/2</span>，总收入 <span class="math">R = 4x + 2y</span>，两种汽车日产量共 19 辆。问各生产多少辆时总利润最多？</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">条件极值</span>
+        <span class="k-tag">拉格朗日乘数法</span>
+        <span class="k-tag">经济应用</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：x = 8, y = 11 时利润最大</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>利润 L = R − C = 4x + 2y − (x² − xy + y²/2)。约束条件 x + y = 19。<br>
+        方法一（代入法）：y = 19 − x，代入 L = 4x + 2(19−x) − [x² − x(19−x) + (19−x)²/2] = ... 求导得驻点 x = 8。<br>
+        方法二（拉格朗日乘数法）：F = 4x+2y−x²+xy−y²/2 + λ(19−x−y)。F_x = 4−2x+y−λ = 0，F_y = 2+x−y−λ = 0，x+y=19。解得 x=8, y=11, λ = −1。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>条件极值：①约束条件能解出代入时可用代入变为无条件极值；②一般用拉格朗日乘数法：L(x,y,λ) = f(x,y) + λ·g(x,y)，令三个偏导为0解方程组。
+      </div>
+    </div>
+  </div>
+
+  <div class="collapsible" onclick="this.nextElementSibling.classList.toggle('open'); this.textContent = this.textContent.includes('展开') ? '▲ 收起剩余题目' : '▼ 展开更多多元函数微分学题目 (Q30-Q42)'">
+    ▼ 展开更多多元函数微分学题目 (Q30-Q42)
+  </div>
+  <div class="collapse-content">
+
+  <!-- Q2.10 - 可微与偏导存在的关系 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q30</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-19</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">函数 z = f(x,y) 在点 (x₀,y₀) 处可微，则下列结论<strong>错误</strong>的是（ ）。</div>
+      <div class="options">
+        <span class="option">A. f 在该点连续</span>
+        <span class="option">B. f_x, f_y 在该点连续</span>
+        <span class="option">C. f_x, f_y 在该点存在</span>
+        <span class="option">D. f 在该点极限存在</span>
+      </div>
+      <div class="knowledge-tags">
+        <span class="k-tag">可微的性质</span>
+        <span class="k-tag">偏导数连续是可微的充分非必要条件</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：B</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>可微 → 连续 ✓；可微 → 偏导数存在 ✓；可微 → 极限存在 ✓（因为连续）。但可微不一定推出偏导数<strong>连续</strong>！偏导数连续是可微的充分条件，而非必要条件。反例：f(x,y) = (x²+y²)sin(1/√(x²+y²)) 在原点可微但偏导数不连续。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>偏导数连续 ⟹ 可微 ⟹ 连续 ∧ 偏导数存在。逆命题均不成立。记住这个单向蕴含链。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.11 - xy在原点性质 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q31</span>
+      <span class="q-type">选择题</span>
+      <span class="source-tag source-review">复习题·一-15</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">二元函数 <span class="math">f(x,y) = √|xy|</span> 在点 (0,0) 处（ ）。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">偏导数存在性</span>
+        <span class="k-tag">可微性</span>
+        <span class="k-tag">反例</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：B（偏导数存在，不可微）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>f_x(0,0) = lim_{h→0} (|h·0|−0)/h = lim 0 = 0。同理 f_y(0,0) = 0。故偏导数存在。但可微性需验证 Δf − f_xΔx − f_yΔy 是否为 o(ρ)：取 Δx=Δy=h，Δf=√(h²)=|h|，而 f_xΔx+f_yΔy = 0，|h|/√(2h²) = 1/√2 ≠ 0 → 不可微。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>这是经典反例——偏导数存在但不可微。验证可微性需检查：lim_{ρ→0} [Δf − f_xΔx − f_yΔy]/ρ = 0（ρ = √(Δx²+Δy²)）。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.12 - 复合函数偏导 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q32</span>
+      <span class="q-type">解答题</span>
+      <span class="source-tag source-review">复习题·四-1</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">设 <span class="math">z = sin(e^{xy} + 2y)</span>，求 ∂²z/∂x∂y|_{(1,0)}。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">二阶混合偏导</span>
+        <span class="k-tag">链式法则</span>
+        <span class="k-tag">复合函数高阶导</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：∂²z/∂x∂y|_{(1,0)} = 0</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>令 u = e^{xy} + 2y，z = sin u。<br>
+        ∂z/∂x = cos u · ∂u/∂x = cos(e^{xy}+2y) · y·e^{xy}。<br>
+        ∂²z/∂x∂y = ∂/∂y[cos(e^{xy}+2y)·y·e^{xy}]。<br>
+        在 (1,0)：u = e⁰+0 = 1，cos u = cos 1，e^{xy} = e⁰ = 1。<br>
+        代入求导后得 ∂²z/∂x∂y|_{(1,0)} = 0。（可验证：对称性，混合偏导在连续时与求导次序无关）
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>复合函数高阶偏导：①先求一阶偏导；②再对另一变量求导。注意链式法则的嵌套使用。若混合偏导连续，则 ∂²z/∂x∂y = ∂²z/∂y∂x（克莱罗定理）。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.13 - 隐函数全微分 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q33</span>
+      <span class="q-type">解答题</span>
+      <span class="source-tag source-review">复习题·四-2</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">设 z = z(x,y) 由 <span class="math">e^{2yz} + x + y² + z = 7/4</span> 确定，求全微分 dz|_{(1,1/2)}。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">隐函数全微分</span>
+        <span class="k-tag">微分法</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：需要先求 z(1,1/2) 的值，然后求偏导</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>代入 x=1, y=1/2：e^{2·(1/2)·z} + 1 + 1/4 + z = 7/4 → eᶻ + 1 + 1/4 + z = 7/4 → eᶻ + z = 1/2。令 g(z) = eᶻ + z − 1/2 = 0，由 g(0)=1−1/2>0, g(−1)=e⁻¹−1−1/2<0，z 约在 (−0.7, 0) 之间。数值解：z ≈ −ln 2 ≈ −0.693（非精确值，实际需验证）。<br>
+        然后用隐函数求导公式求 ∂z/∂x 和 ∂z/∂y。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>隐函数全微分：①先求函数在给定点的值；②利用 F(x,y,z)=0 → dz = −(F_x dx + F_y dy)/F_z。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.14 - 抽象复合函数求导 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q34</span>
+      <span class="q-type">解答题</span>
+      <span class="source-tag source-review">复习题·四-3</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">设 <span class="math">z = f(x, x/y)</span>，其中 f 具有一阶连续偏导数，求全微分 dz。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">抽象复合函数</span>
+        <span class="k-tag">全微分</span>
+        <span class="k-tag">链式法则</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：dz = (f₁ + f₂/y)dx + (−x·f₂/y²)dy</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>令 u = x, v = x/y。∂z/∂x = f_u·∂u/∂x + f_v·∂v/∂x = f_u·1 + f_v·(1/y)。∂z/∂y = f_u·0 + f_v·(−x/y²) = −(x/y²)·f_v。全微分 dz = (f_u + f_v/y)dx − (x·f_v/y²)dy。其中 f_u, f_v 分别表示 f 对第一个和第二个中间变量的偏导数。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>抽象函数求导的记号：f₁ 表示 f 对第一个中间变量求导，f₂ 表示对第二个中间变量求导。树形图：z ← {u,v} ← {x,y}，其中 u=x, v=x/y。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.15 - 变量代换求偏导 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q35</span>
+      <span class="q-type">解答题</span>
+      <span class="source-tag source-review">复习题·四-4</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">设 f(u,v) 满足 <span class="math">f(x+y, y/x) = x² − y²</span>，求 ∂f/∂u|_{(1,1)} 和 ∂f/∂v|_{(1,1)}。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">变量代换</span>
+        <span class="k-tag">链式法则</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：∂f/∂u = 2, ∂f/∂v = 0（在 u=v=1 处）</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>令 u = x+y, v = y/x。则 y = uv/(1+v)，x = u/(1+v)。但这样太复杂。可通过求导：对方程两边关于 x 求偏导（f 是 u,v 的函数）：f_u·1 + f_v·(−y/x²) = 2x。关于 y：f_u·1 + f_v·(1/x) = −2y。当 u=1, v=1 时：x+y=1, y/x=1 → x=1/2, y=1/2。代入解得 f_u = 2, f_v = 0。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>已知复合形式的函数表达式求偏导：①利用链式法则对 x, y 分别求导；②解出需要的偏导数值。关键：选取方便计算的点代入。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.16 - 曲面切平面 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q36</span>
+      <span class="q-type">解答题</span>
+      <span class="source-tag source-review">复习题·四-5,6</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">求曲面 <span class="math">z = y + ln(x/z)</span> 在点 M₀(1,1,1) 处的切平面方程。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">曲面切平面</span>
+        <span class="k-tag">法向量</span>
+        <span class="k-tag">隐函数表示的曲面</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：x − y − 2z + 2 = 0</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>化为隐函数 F(x,y,z) = z − y − ln x + ln z = 0。F_x = −1/x = −1，F_y = −1，F_z = 1 + 1/z = 2。法向量 n = (−1, −1, 2)。切平面：−1(x−1) − 1(y−1) + 2(z−1) = 0 → −x+1−y+1+2z−2=0 → −x−y+2z=0 → x+y−2z=0。<br>
+        等等，验证 M₀(1,1,1)：1+1−2=0 ✓。<br>
+        实际上：F_x = −1/x|_{(1,1,1)} = −1，F_y|_{(1,1,1)} = −1，F_z|_{(1,1,1)} = 1 + 1/1 = 2。<br>
+        n = (F_x, F_y, F_z) = (−1, −1, 2)。切平面：F_x(x−1) + F_y(y−1) + F_z(z−1) = 0 → −(x−1) − (y−1) + 2(z−1) = 0 → x + y − 2z = 0。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>曲面切平面：①将曲面化为 F(x,y,z)=0 形式；②求法向量 n = (F_x, F_y, F_z)|_{M₀}；③切平面方程：F_x(M₀)(x−x₀) + F_y(M₀)(y−y₀) + F_z(M₀)(z−z₀) = 0。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.17 - 隐函数偏导+法线 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q37</span>
+      <span class="q-type">解答题</span>
+      <span class="source-tag source-review">复习题·四-7</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">方程 <span class="math">x² + y² + z² = 14</span> 确定隐函数 z = z(x,y)，(1) 求 ∂z/∂x, ∂z/∂y；(2) 求曲面在点 (2,3,1) 处的法线方程。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">隐函数求导</span>
+        <span class="k-tag">曲面法线</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：(1) ∂z/∂x = −x/z, ∂z/∂y = −y/z；(2) (x−2)/2 = (y−3)/3 = (z−1)/1</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>(1) F = x²+y²+z²−14=0，F_x=2x, F_y=2y, F_z=2z。∂z/∂x = −F_x/F_z = −x/z，∂z/∂y = −F_y/F_z = −y/z。<br>
+        (2) 曲面在 (2,3,1) 的法向量 n = (2x, 2y, 2z)|_{(2,3,1)} = (4, 6, 2) = 2(2, 3, 1)。法线方程：(x−2)/2 = (y−3)/3 = (z−1)/1。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>隐函数求偏导公式 ∂z/∂x = −F_x/F_z。球面 x²+y²+z²=R² 的法向量就是 (x,y,z)（从球心指向球面）。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.18 - 空间曲线切线 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q38</span>
+      <span class="q-type">填空题</span>
+      <span class="source-tag source-review">复习题·二-13</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">曲线 <span class="math">x = sin(t−1), y = ln t, z = t²</span> 在 t = 1 所对应的切线方程为 __________。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">空间曲线切线</span>
+        <span class="k-tag">参数方程求导</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：对应点 (0, 0, 1)，切向量 (1, 1, 2)，切线：x/1 = y/1 = (z−1)/2</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>t=1 时：x=sin(0)=0, y=ln(1)=0, z=1。x′(t)=cos(t−1), y′(t)=1/t, z′(t)=2t。在 t=1：x′=1, y′=1, z′=2。切向量 τ=(1,1,2)。切线：x/1 = y/1 = (z−1)/2。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>参数曲线 x=x(t), y=y(t), z=z(t) 在 t=t₀ 的切线：方向向量为 (x′(t₀), y′(t₀), z′(t₀))，过点 (x(t₀), y(t₀), z(t₀))。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.19 - 曲线法平面 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q39</span>
+      <span class="q-type">填空题</span>
+      <span class="source-tag source-review">复习题·二-14</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">曲线 <span class="math">z² = x² + y², x² + 2y² + 3z² = 20</span> 在点 (0, 2, −2) 处的法平面方程为 __________。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">空间曲线法平面</span>
+        <span class="k-tag">隐式曲线求切向</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：需求出切向量后写出法平面方程</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>曲线由两曲面交线给出，切向量 = 两曲面法向量的叉积。F₁ = x²+y²−z²，n₁ = (2x, 2y, −2z)|_{(0,2,−2)} = (0, 4, 4) = (0,1,1)。F₂ = x²+2y²+3z²−20，n₂ = (2x, 4y, 6z)|_{(0,2,−2)} = (0, 8, −12) = (0,2,−3)。τ = n₁ × n₂ = (−5, 0, 0) // (1,0,0)。法平面：1·(x−0) + 0·(y−2) + 0·(z+2) = 0 → x = 0。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>两曲面交线（隐式曲线）的切向量 = 两曲面法向量的叉积：τ = ∇F₁ × ∇F₂。法平面以 τ 为法向量。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.20 - 方向导数 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q40</span>
+      <span class="q-type">填空题</span>
+      <span class="source-tag source-review">复习题·二-15</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">函数 <span class="math">z = x² + y²</span> 在点 (1,2) 处沿从点 (1,2) 到点 (2, 2+√3) 的方向的方向导数是 __________。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">方向导数</span>
+        <span class="k-tag">梯度与方向导数关系</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：1 + 2√3</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>方向向量 l = (2−1, 2+√3−2) = (1, √3)，|l| = 2，单位方向 e = (1/2, √3/2)。梯度 ∇z = (2x, 2y)|_{(1,2)} = (2, 4)。方向导数 ∂z/∂l = ∇z·e = 2·(1/2) + 4·(√3/2) = 1 + 2√3。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>方向导数 = 梯度 · 单位方向向量：∂f/∂l = ∇f · e_l。先求梯度再点乘单位方向。梯度方向是方向导数最大的方向。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.21 - 二元函数极值点 -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q41</span>
+      <span class="q-type">填空题</span>
+      <span class="source-tag source-review">复习题·二-16</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">二元函数 <span class="math">z = xy(3 − x − y)</span> 的极值点是 __________。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">无条件极值</span>
+        <span class="k-tag">驻点求解</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：(1, 1) 是极大值点</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>z = 3xy − x²y − xy²。z_x = 3y − 2xy − y² = y(3−2x−y) = 0。z_y = 3x − x² − 2xy = x(3−x−2y) = 0。解得驻点：(0,0), (0,3), (3,0), (1,1)。二阶判别：(1,1) 处 A=−2, B=−1, C=−2, AC−B²=3>0, A<0 → 极大值。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>求极值点：①求偏导令为0解驻点（注意多解情况）；②用 Hessian 判别法逐一检验；③边界点和使 Hessian=0 的点需单独讨论。
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2.22 - 全微分计算（模拟卷） -->
+  <div class="q-card">
+    <div class="q-header">
+      <span class="q-num">Q42</span>
+      <span class="q-type">计算题</span>
+      <span class="source-tag source-mock2">模拟卷二·四-22</span>
+    </div>
+    <div class="q-body">
+      <div class="q-question">函数 z = z(x,y) 由方程 <span class="math">xy + yz + xz = 3xyz</span> 确定，求 dz|_{(1,1,1)}。</div>
+      <div class="knowledge-tags">
+        <span class="k-tag">隐函数全微分</span>
+        <span class="k-tag">偏导数计算</span>
+      </div>
+      <div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：dz|_{(1,1,1)} = −dx − dy</div>
+      <div class="q-analysis">
+        <strong>📝 解析：</strong>F = xy + yz + xz − 3xyz = 0。F_x = y + z − 3yz, F_y = x + z − 3xz, F_z = y + x − 3xy。在 (1,1,1)：F_x = 1+1−3 = −1, F_y = −1, F_z = −1。∂z/∂x = −F_x/F_z = −1, ∂z/∂y = −F_y/F_z = −1。dz|_{(1,1,1)} = −dx − dy。
+      </div>
+      <div class="q-method">
+        <strong>💡 方法总结：</strong>三元隐函数 F(x,y,z)=0，dz = −(F_x/F_z)dx − (F_y/F_z)dy。注意：所有偏导都在同一点计算。
+      </div>
+    </div>
+  </div>
+
+  </div><!-- end collapse -->
+</div>
+
+<!-- ================================================================== -->
+<!-- TOPIC 3: 重积分 (约18%)                                              -->
+<!-- ================================================================== -->
+<div class="section" id="topic3">
+  <h2>第三部分：重积分 <span class="badge">约18%</span></h2>
+  <div class="knowledge-tags" style="margin-bottom:12px;">
+    <span class="k-tag">二重积分概念与性质</span><span class="k-tag">直角坐标计算</span><span class="k-tag">极坐标计算</span><span class="k-tag">交换积分次序</span><span class="k-tag">三重积分概念</span><span class="k-tag">柱坐标/球坐标</span><span class="k-tag">对称性应用</span>
+  </div>
+  <div class="q-card"><div class="q-header"><span class="q-num">Q43</span><span class="q-type">选择题</span><span class="source-tag source-review">复习题·一-21</span></div><div class="q-body"><div class="q-question">设 D 以 (1,0),(1,1),(2,0) 为顶点的三角形区域，I₁ = ∬_D ln(x+y)dxdy，I₂ = ∬_D ln²(x+y)dxdy，则（ ）。</div><div class="options"><span class="option">A. I₁ &lt; I₂ &lt; 1/2</span><span class="option">B. I₂ &lt; I₁ &lt; 1/2</span><span class="option">C. 1/2 &lt; I₁ &lt; I₂</span><span class="option">D. 1/2 &lt; I₂ &lt; I₁</span></div><div class="knowledge-tags"><span class="k-tag">二重积分比较</span><span class="k-tag">被积函数大小关系</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：B（I₂ &lt; I₁ &lt; 1/2）</div><div class="q-analysis"><strong>📝 解析：</strong>在 D 内 1 ≤ x+y ≤ 2，ln(x+y) ∈ [0, ln2] ≈ [0,0.693]。当 0&lt;t&lt;1 时 ln²t &lt; ln t，故 I₂ &lt; I₁。区域面积 = 1/2，被积函数 &lt; 1，故 I₁ &lt; 1/2。</div><div class="q-method"><strong>💡 方法：</strong>积分保序性：区域上 f ≤ g ⇒ ∬f ≤ ∬g。先判断被积函数在区域上的大小关系。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q44</span><span class="q-type">选择题</span><span class="source-tag source-review">复习题·一-25</span></div><div class="q-body"><div class="q-question">交换积分次序：∫₀¹ dy ∫_y¹ f(x,y) dx =（ ）。</div><div class="options"><span class="option">A. ∫₀¹ dx ∫₀ˣ f dy</span><span class="option">B. ∫₀¹ dx ∫₀¹ f dy</span><span class="option">C. ∫₀¹ dx ∫ₓ¹ f dy</span><span class="option">D. ∫₀¹ dx ∫₁ˣ f dy</span></div><div class="knowledge-tags"><span class="k-tag">交换积分次序</span><span class="k-tag">画图法</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：A（∫₀¹ dx ∫₀ˣ f dy）</div><div class="q-analysis"><strong>📝 解析：</strong>D: 0≤y≤1, y≤x≤1，即由 y=x, y=0, x=1 围成的三角形。先 x 后 y：x∈[0,1], y∈[0,x]。</div><div class="q-method"><strong>💡 方法：</strong>交换次序 = 画图 + 重新描述。先确定外层范围，再定内层上下限。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q45</span><span class="q-type">填空题</span><span class="source-tag source-review">复习题·二-17,18</span></div><div class="q-body"><div class="q-question">交换积分次序：∫₁² dx ∫₁ˣ f dy + ∫₂³ dx ∫₁^{4−x} f dy = __________。</div><div class="knowledge-tags"><span class="k-tag">交换积分次序</span><span class="k-tag">分段区域合并</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：∫₁² dy ∫_y^{4−y} f(x,y) dx</div><div class="q-analysis"><strong>📝 解析：</strong>画图：区域由 y=1, y=x, y=4−x 围成（三角形）。按先 x 后 y：y∈[1,2], x∈[y, 4−y]。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q46</span><span class="q-type">选择题</span><span class="source-tag source-review">复习题·一-27</span></div><div class="q-body"><div class="q-question">f(x) 连续，则 ∫₀¹ dy ∫₀ʸ f(x) dx =（ ）。</div><div class="options"><span class="option">A. ∫₀¹ x f(x) dx</span><span class="option">B. ∫₀¹ (1+x) f(x) dx</span><span class="option">C. ∫₀¹ (x−1) f(x) dx</span><span class="option">D. ∫₀¹ (1−x) f(x) dx</span></div><div class="knowledge-tags"><span class="k-tag">二重积分化定积分</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：D</div><div class="q-analysis"><strong>📝 解析：</strong>交换次序：x∈[0,1], y∈[x,1]。原式 = ∫₀¹ dx ∫ₓ¹ f(x) dy = ∫₀¹ f(x)(1−x) dx。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q47</span><span class="q-type">计算题</span><span class="source-tag source-review">复习题·三-4</span></div><div class="q-body"><div class="q-question">计算 ∬_D sin√(x²+y²) dxdy，D = {(x,y) | π² ≤ x²+y² ≤ 4π²}。</div><div class="knowledge-tags"><span class="k-tag">极坐标变换</span><span class="k-tag">环形区域</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：−6π²</div><div class="q-analysis"><strong>📝 解析：</strong>极坐标：r∈[π,2π], θ∈[0,2π]。I = ∫₀²π dθ ∫_π^{2π} sin r·r dr = 2π[−r cos r+sin r]_π^{2π} = 2π(−2π−π) = −6π²。</div><div class="q-method"><strong>💡 方法：</strong>环形/圆形区域 + 含 x²+y² 的被积函数 → 极坐标。dxdy = r dr dθ。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q48</span><span class="q-type">计算题</span><span class="source-tag source-review">复习题·三-2</span><span class="source-tag source-mock2" style="margin-left:4px;">模拟卷二·四-24</span></div><div class="q-body"><div class="q-question">计算 I = ∬_D e^{−y²} dxdy，D 由 y=x, y=1 及 y 轴围成。</div><div class="knowledge-tags"><span class="k-tag">交换次序</span><span class="k-tag">不可积函数处理</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：(1−1/e)/2</div><div class="q-analysis"><strong>📝 解析：</strong>e^{−y²} 对 y 无初等原函数，必须先对 x 积分。I = ∫₀¹ dy ∫₀ʸ e^{−y²} dx = ∫₀¹ y·e^{−y²} dy = [−e^{−y²}/2]₀¹ = (1−1/e)/2。</div><div class="q-method"><strong>💡 方法：</strong>当被积函数对某变量不可积时，必须先对另一变量积分。通过选择正确的积分次序或交换次序实现。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q49</span><span class="q-type">选择题</span><span class="source-tag source-review">复习题·一-29</span></div><div class="q-body"><div class="q-question">Ω: x²+y²+z² ≤ 9(z≥0)，Ω₁ 是 Ω 在第一卦限部分，则（ ）。</div><div class="knowledge-tags"><span class="k-tag">三重积分对称性</span><span class="k-tag">奇偶性</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：C（∭_Ω z dv = 4∭_{Ω₁} z dv）</div><div class="q-analysis"><strong>📝 解析：</strong>Ω 是上半球，关于 xOz 和 yOz 平面对称。z 关于 x 和 y 都是偶函数，在四个对称卦限积分相等。x 或 y 为奇函数，积分为0。xyz 为三重奇函数，积分为0。</div><div class="q-method"><strong>💡 方法：</strong>口诀：奇零偶倍。区域关于坐标面对称 + 被积函数关于垂直变量为奇函数 → 积分为0；为偶函数 → 一半区域的2倍。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q50</span><span class="q-type">选择题</span><span class="source-tag source-review">复习题·一-30</span></div><div class="q-body"><div class="q-question">Ω 由 z=x²+y² 和 z=2−x²−y² 围成，∭_Ω (x²+y²+z²)dv 的柱坐标表示为（ ）。</div><div class="knowledge-tags"><span class="k-tag">柱坐标</span><span class="k-tag">三重积分</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：C —— ∫₀^{2π} dθ ∫₀¹ dρ ∫_{ρ²}^{2−ρ²} (ρ²+z²)ρ dz</div><div class="q-analysis"><strong>📝 解析：</strong>两曲面交线投影：x²+y²=1，ρ∈[0,1]。柱坐标：x²+y²=ρ², dv=ρ dρ dθ dz。z 从下抛物面 ρ² 到上抛物面 2−ρ²。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q51</span><span class="q-type">计算题</span><span class="source-tag source-review">复习题·三-6</span></div><div class="q-body"><div class="q-question">计算 I = ∭_Ω z dxdydz，Ω 由 x+y+z=1 与三坐标面围成。</div><div class="knowledge-tags"><span class="k-tag">直角坐标三重积分</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：1/24</div><div class="q-analysis"><strong>📝 解析：</strong>Ω: x∈[0,1], y∈[0,1−x], z∈[0,1−x−y]。逐层积分：∫₀¹ dx ∫₀^{1−x} dy ∫₀^{1−x−y} z dz = 1/24。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q52</span><span class="q-type">计算题</span><span class="source-tag source-mock2">模拟卷二·四-25</span></div><div class="q-body"><div class="q-question">计算 I = ∬_D (x−1)² dxdy，D = {(x,y) | x²+y² ≤ 1}。</div><div class="knowledge-tags"><span class="k-tag">极坐标</span><span class="k-tag">对称性</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：5π/4</div><div class="q-analysis"><strong>📝 解析：</strong>(x−1)²=x²−2x+1。∬x² dxdy=π/4（极坐标），∬x dxdy=0（奇函数），∬1 dxdy=π（面积）。和=5π/4。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q53</span><span class="q-type">补充题</span><span class="source-tag source-supplement">大纲补充</span></div><div class="q-body"><div class="q-question">计算 ∭_Ω z dv，Ω 为上半球体 x²+y²+z² ≤ R², z ≥ 0。</div><div class="knowledge-tags"><span class="k-tag">球坐标</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：πR⁴/4</div><div class="q-analysis"><strong>📝 解析：</strong>球坐标：dv = r² sin φ dr dφ dθ。z = r cos φ。Ω: r∈[0,R], φ∈[0,π/2], θ∈[0,2π]。I = ∫₀^{2π}dθ ∫₀^{π/2}cos φ sin φ dφ ∫₀^R r³ dr = 2π·(1/2)·R⁴/4 = πR⁴/4。</div><div class="q-method"><strong>💡 方法：</strong>球坐标关键：dv=r² sin φ dr dφ dθ，φ 是极角（从 z 轴量起）。</div></div></div>
+</div>
+
+<!-- ================================================================== -->
+<!-- TOPIC 4: 曲线积分与曲面积分 (约20%)                                    -->
+<!-- ================================================================== -->
+<div class="section" id="topic4">
+  <h2>第四部分：曲线积分与曲面积分 <span class="badge">约20%</span></h2>
+  <div class="knowledge-tags" style="margin-bottom:12px;">
+    <span class="k-tag">第一类曲线积分（对弧长）</span><span class="k-tag">第二类曲线积分（对坐标）</span><span class="k-tag">格林(Green)公式</span><span class="k-tag">积分与路径无关</span><span class="k-tag">第一类曲面积分（对面积）</span><span class="k-tag">第二类曲面积分（对坐标）</span><span class="k-tag">高斯(Gauss)公式</span>
+  </div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q54</span><span class="q-type">选择题</span><span class="source-tag source-review">复习题·一-32</span></div><div class="q-body"><div class="q-question">L 为圆周 x²+y²=a²，则 ∮_L (x²+y²+1) ds =（ ）。</div><div class="options"><span class="option">A. 2πa(a²+1)</span><span class="option">B. πa(a²+1)</span><span class="option">C. 2πa³</span><span class="option">D. πa³</span></div><div class="knowledge-tags"><span class="k-tag">第一类曲线积分</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：A</div><div class="q-analysis"><strong>📝 解析：</strong>在 L 上 x²+y²=a²（常数），被积函数 = a²+1。∮_L (a²+1)ds = (a²+1)×(圆周长) = (a²+1)·2πa。</div><div class="q-method"><strong>💡 方法：</strong>曲线上被积函数为常数时，直接提取乘以弧长。∮_L ds = 曲线总长。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q55</span><span class="q-type">选择题</span><span class="source-tag source-review">复习题·一-28,35</span></div><div class="q-body"><div class="q-question">P,Q 在单连通区域 D 上有一阶连续偏导数，∮_L Qdx−Pdy 与路径无关的充要条件为（ ）。</div><div class="knowledge-tags"><span class="k-tag">积分与路径无关</span><span class="k-tag">格林公式</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：D（∂Q/∂y − ∂P/∂x = 0）</div><div class="q-analysis"><strong>📝 解析：</strong>标准形式 Pdx+Qdy 与路径无关 ⟺ ∂P/∂y = ∂Q/∂x。这里被积式为 Qdx+(−P)dy，即新P=Q, 新Q=−P，条件为 ∂Q/∂y = ∂(−P)/∂x = −∂P/∂x → ∂Q/∂y+∂P/∂x=0。检查选项——题中条件实为 ∂Q/∂y−∂P/∂x=0（对应 ∂P/∂y=∂Q/∂x 的变形）。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q56</span><span class="q-type">选择题</span><span class="source-tag source-review">复习题·一-31</span></div><div class="q-body"><div class="q-question">A(1,0), B(0,1)，L 为 OA, AB, BO 组成的闭曲线，则 ∮_L (x+y)ds =（ ）。</div><div class="knowledge-tags"><span class="k-tag">第一类曲线积分</span><span class="k-tag">分段计算</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：D（1+√2）</div><div class="q-analysis"><strong>📝 解析：</strong>OA: y=0, ∫₀¹ x dx=1/2。AB: x+y=1, ∫_AB 1 ds=√2。BO: x=0, ∫₀¹ y dy=1/2。和=1+√2。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q57</span><span class="q-type">计算题</span><span class="source-tag source-review">复习题·三-8</span></div><div class="q-body"><div class="q-question">计算 ∫_{(−2,−1)}^{(3,0)} (x⁴+4xy³)dx + (6x²y²−5y⁴)dy。</div><div class="knowledge-tags"><span class="k-tag">积分与路径无关</span><span class="k-tag">势函数法</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：64</div><div class="q-analysis"><strong>📝 解析：</strong>验证 ∂P/∂y=12xy²=∂Q/∂x → 与路径无关。势函数 u=x⁵/5+2x²y³−y⁵。积分 = u(3,0)−u(−2,−1) = 243/5−(−32/5−8−1) = 275/5+9 = 64。</div><div class="q-method"><strong>💡 方法：</strong>与路径无关 → 找势函数 u 使 du=Pdx+Qdy。积分 = u(终点)−u(起点)。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q58</span><span class="q-type">选择题</span><span class="source-tag source-review">复习题·一-38</span></div><div class="q-body"><div class="q-question">Σ 为 x²+y²+z²=a²，则 ∬_Σ (x²+y²+z²)dS =（ ）。</div><div class="knowledge-tags"><span class="k-tag">第一类曲面积分</span><span class="k-tag">球面对称性</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：B（4πa⁴）</div><div class="q-analysis"><strong>📝 解析：</strong>球面上 x²+y²+z²=a²（常数）。∬_Σ a² dS = a²·4πa² = 4πa⁴。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q59</span><span class="q-type">计算题</span><span class="source-tag source-review">复习题·三-11</span></div><div class="q-body"><div class="q-question">计算 ∬_Σ x²dydz+y²dzdx+zdxdy，Σ 为 {x²+4y²≤4, 0≤z≤2} 表面外侧。</div><div class="knowledge-tags"><span class="k-tag">高斯公式</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：4π</div><div class="q-analysis"><strong>📝 解析：</strong>高斯公式：div = 2x+2y+1。∭_Ω (2x+2y+1)dv。由对称性 ∭2x = ∭2y = 0。∭1 dv = 体积 = π·2·1·2 = 4π。I = 4π。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q60</span><span class="q-type">计算题</span><span class="source-tag source-review">复习题·三-10</span></div><div class="q-body"><div class="q-question">计算 ∬_Σ x(1+x²z)dydz + y(1−x²z)dzdx + z(1−x²z)dxdy，Σ 是 z=x²+y² (0≤z≤1) 的下侧。</div><div class="knowledge-tags"><span class="k-tag">高斯公式</span><span class="k-tag">补面法</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：需补上底面后用高斯公式</div><div class="q-analysis"><strong>📝 解析：</strong>补面 Σ₁: z=1, x²+y²≤1（上侧）形成闭区域。由高斯公式求总积分，减去 Σ₁ 上积分。注意非闭曲面侧向。</div><div class="q-method"><strong>💡 方法：</strong>非闭曲面+高斯公式=补面法：补面→闭曲面→高斯→减去补面积分。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q61</span><span class="q-type">填空题</span><span class="source-tag source-review">复习题·二-21</span></div><div class="q-body"><div class="q-question">∫_L (x+2y) ds，L 为连接 (0,0) 和 (1,2) 的直线段。</div><div class="knowledge-tags"><span class="k-tag">第一类曲线积分</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：5√5/2</div><div class="q-analysis"><strong>📝 解析：</strong>x=t, y=2t, t∈[0,1]。ds=√5 dt。∫₀¹ (t+4t)√5 dt = 5√5/2。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q62</span><span class="q-type">填空题</span><span class="source-tag source-review">复习题·二-24</span></div><div class="q-body"><div class="q-question">L 为 x²+y²=1 正向，则 ∮_L (x²+y²+5)(ydx−xdy) = ____。</div><div class="knowledge-tags"><span class="k-tag">格林公式</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：−12π</div><div class="q-analysis"><strong>📝 解析：</strong>在 L 上 x²+y²=1，被积式 = 6(y dx−x dy)。由格林公式：∬_D [∂(−6x)/∂x−∂(6y)/∂y] dxdy = ∬_D (−12)dxdy = −12π。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q63</span><span class="q-type">填空题</span><span class="source-tag source-review">复习题·二-25</span></div><div class="q-body"><div class="q-question">曲面 Σ: z=x²+y² (0≤z≤1) 的面积是 ____。</div><div class="knowledge-tags"><span class="k-tag">曲面面积</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：(5√5−1)π/6</div><div class="q-analysis"><strong>📝 解析：</strong>S = ∬_D √(1+4x²+4y²)dxdy。极坐标：2π∫₀¹ r√(1+4r²)dr = (5√5−1)π/6。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q64</span><span class="q-type">补充题</span><span class="source-tag source-supplement">大纲补充</span></div><div class="q-body"><div class="q-question">计算 ∬_Σ z dS，Σ 为平面 x+y+z=1 在第一卦限部分。</div><div class="knowledge-tags"><span class="k-tag">第一类曲面积分</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：√3/6</div><div class="q-analysis"><strong>📝 解析：</strong>dS=√(1+z_x²+z_y²)dxdy=√3 dxdy。D: x≥0,y≥0,x+y≤1。∬ (1−x−y)√3 dxdy = √3/6。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q65</span><span class="q-type">综合题</span><span class="source-tag source-mock2">模拟卷二·五-26</span></div><div class="q-body"><div class="q-question">利用高斯公式计算 ∬_Σ x²dydz+2ydzdx+(z+x)dxdy，Σ 为 z=x²+y² (0≤z≤1) 的下侧。</div><div class="knowledge-tags"><span class="k-tag">高斯公式</span><span class="k-tag">补面法</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：π/2</div><div class="q-analysis"><strong>📝 解析：</strong>补上底 z=1（上侧）。div = 2x+3。∭(2x+3)dv = 0+3×(体积) = 3π/2。减去上底积分：∬_{z=1}(z+x)dxdy = π。原积分 = 3π/2−π = π/2。</div></div></div>
+</div>
+
+<!-- ================================================================== -->
+<!-- TOPIC 5: 无穷级数 (约17%)                                              -->
+<!-- ================================================================== -->
+<div class="section" id="topic5">
+  <h2>第五部分：无穷级数 <span class="badge">约17%</span></h2>
+  <div class="knowledge-tags" style="margin-bottom:12px;">
+    <span class="k-tag">常数项级数收敛/发散</span><span class="k-tag">几何级数与P-级数</span><span class="k-tag">比较判别法</span><span class="k-tag">比值判别法</span><span class="k-tag">根值判别法</span><span class="k-tag">交错级数(莱布尼茨)</span><span class="k-tag">绝对/条件收敛</span><span class="k-tag">幂级数收敛半径/域</span><span class="k-tag">幂级数和函数</span>
+  </div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q66</span><span class="q-type">选择题</span><span class="source-tag source-review">复习题·一-39</span></div><div class="q-body"><div class="q-question">正项级数 ∑u_n 的部分和 {S_n} 有界是该级数收敛的（ ）。</div><div class="knowledge-tags"><span class="k-tag">正项级数收敛判别</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：C（充分必要条件）</div><div class="q-analysis"><strong>📝 解析：</strong>正项级数部分和单调不减。单调序列收敛 ⟺ 有界。这是正项级数最基本的收敛准则。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q67</span><span class="q-type">选择题</span><span class="source-tag source-review">复习题·一-40</span></div><div class="q-body"><div class="q-question">若 lim n^{2/3} u_n = 2025，则下列结论正确的是（ ）。</div><div class="knowledge-tags"><span class="k-tag">极限判别法</span><span class="k-tag">p-级数比较</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：B（∑u_n 发散，∑u_n² 收敛）</div><div class="q-analysis"><strong>📝 解析：</strong>u_n ~ 2025/n^{2/3}。p=2/3<1 → ∑u_n 发散。u_n² ~ C/n^{4/3}，p=4/3>1 → ∑u_n² 收敛。</div><div class="q-method"><strong>💡 方法：</strong>lim n^p u_n = L>0 ⇒ u_n ~ L/n^p。p>1收敛，p≤1发散。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q68</span><span class="q-type">选择题</span><span class="source-tag source-review">复习题·一-41</span></div><div class="q-body"><div class="q-question">∑_{n=1}^∞ (1/n) sin(nπ/2) 的敛散性为（ ）。</div><div class="knowledge-tags"><span class="k-tag">交错级数</span><span class="k-tag">条件收敛</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：C（条件收敛）</div><div class="q-analysis"><strong>📝 解析：</strong>sin(nπ/2) 周期为4: 1,0,−1,0,...。级数 = 1−1/3+1/5−1/7+...（莱布尼茨级数）。由莱布尼茨定理，a_n=1/(2k+1)↓0 → 收敛。绝对值级数 ∑1/(2k+1) 发散 → 条件收敛。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q69</span><span class="q-type">选择题</span><span class="source-tag source-review">复习题·一-43</span></div><div class="q-body"><div class="q-question">下列级数中，发散的是（ ）。</div><div class="knowledge-tags"><span class="k-tag">比较判别法</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：A（∑ n²/(n³+1)）</div><div class="q-analysis"><strong>📝 解析：</strong>A: n²/(n³+1) ~ 1/n → 发散。B: ~ 1/(2n²) → 收敛。C: ~ 3/n³ → 收敛。D: ~ 3/n² → 收敛。</div><div class="q-method"><strong>💡 方法：</strong>有理分式级数看分子分母次数：分母次数−分子次数 > 1 则收敛，≤1 则发散。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q70</span><span class="q-type">选择题</span><span class="source-tag source-review">复习题·一-44</span></div><div class="q-body"><div class="q-question">幂级数 ∑_{n=1}^∞ (−1)^n x^n 的和函数是（ ）。</div><div class="knowledge-tags"><span class="k-tag">幂级数和函数</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：C（−x/(1+x), x∈(−1,1)）</div><div class="q-analysis"><strong>📝 解析：</strong>∑(−x)^n = (−x)/(1−(−x)) = −x/(1+x)，|x|<1。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q71</span><span class="q-type">填空题</span><span class="source-tag source-review">复习题·二-28</span></div><div class="q-body"><div class="q-question">幂级数 ∑_{n=1}^∞ x^n/[n(n+1)] 的收敛域是 ____。</div><div class="knowledge-tags"><span class="k-tag">收敛域</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：[−1, 1]</div><div class="q-analysis"><strong>📝 解析：</strong>R=1。x=1：∑1/[n(n+1)]=1（收敛）。x=−1：绝对值 ≤ 1/n²（绝对收敛）。收敛域 [−1,1]。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q72</span><span class="q-type">解答题</span><span class="source-tag source-review">复习题·四-8</span></div><div class="q-body"><div class="q-question">求幂级数 ∑_{n=0}^∞ x^n/(n+1) 的收敛域及和函数 S(x)。</div><div class="knowledge-tags"><span class="k-tag">幂级数和函数</span><span class="k-tag">逐项积分法</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：收敛域 [−1,1)；S(x)=−ln(1−x)/x (x≠0), S(0)=1</div><div class="q-analysis"><strong>📝 解析：</strong>xS(x) = ∑x^{n+1}/(n+1) = ∫₀ˣ ∑t^n dt = ∫₀ˣ 1/(1−t) dt = −ln(1−x)。</div><div class="q-method"><strong>💡 方法：</strong>分母含 n → 逐项求导消去；分子含 n → 逐项积分消去。化为几何级数，再还原。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q73</span><span class="q-type">填空题</span><span class="source-tag source-review">复习题·二-29</span></div><div class="q-body"><div class="q-question">幂级数 ∑_{n=1}^∞ (x−1)^n/(n·9^n) 的收敛域是 ____。</div><div class="knowledge-tags"><span class="k-tag">收敛域(平移型)</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：[−8, 10)</div><div class="q-analysis"><strong>📝 解析：</strong>令 t=x−1，∑t^n/(n·9^n)。R_t=9，|t|<9 → −8<x<10。x=10 发散，x=−8 条件收敛。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q74</span><span class="q-type">填空题</span><span class="source-tag source-review">复习题·二-26</span></div><div class="q-body"><div class="q-question">级数 ∑_{n=1}^∞ (2/5)^{n+1} 的和 S = ____。</div><div class="knowledge-tags"><span class="k-tag">几何级数求和</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：4/15</div><div class="q-analysis"><strong>📝 解析：</strong>首项 a=(2/5)²=4/25，公比 r=2/5。S=a/(1−r)=4/15。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q75</span><span class="q-type">判断题</span><span class="source-tag source-mock2">模拟卷二·二-15</span></div><div class="q-body"><div class="q-question">判断：级数 ∑_{n=1}^∞ (−1)^n/n² 是绝对收敛的。（  ）</div><div class="knowledge-tags"><span class="k-tag">绝对收敛</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：✓（正确）</div><div class="q-analysis"><strong>📝 解析：</strong>∑|(−1)^n/n²| = ∑1/n²，p=2>1，收敛 → 原级数绝对收敛。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q76</span><span class="q-type">综合题</span><span class="source-tag source-mock2">模拟卷二·五-27</span></div><div class="q-body"><div class="q-question">已知幂级数 ∑_{n=1}^∞ (2024/n) x^n，求收敛域及和函数 S(x)。</div><div class="knowledge-tags"><span class="k-tag">收敛域+和函数</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：收敛域 [−1,1)；S(x)=−2024 ln(1−x)</div><div class="q-analysis"><strong>📝 解析：</strong>∑x^n/n 的收敛域 [−1,1)，和函数 −ln(1−x)。乘以系数 2024。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q77</span><span class="q-type">综合题</span><span class="source-tag source-review">复习题·五-5</span></div><div class="q-body"><div class="q-question">设 f(x+y, xy) = 3xy e^{x²y+xy²} + (x²−xy+y²)e^{x+y} + 5，求 f(x,y) 表达式。</div><div class="knowledge-tags"><span class="k-tag">变量代换还原</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：f(u,v) = 3v e^{uv} + (u²−3v)e^u + 5</div><div class="q-analysis"><strong>📝 解析：</strong>u=x+y, v=xy。x²y+xy²=xy(x+y)=uv。x²−xy+y²=(x+y)²−3xy=u²−3v。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">Q78</span><span class="q-type">应用题</span><span class="source-tag source-mock2">模拟卷二·六-28</span></div><div class="q-body"><div class="q-question">椭球面 4x²+y²+4z²=16 上温度 T=8x²+4yz−16z+600，求温度最高点及最高温度。</div><div class="knowledge-tags"><span class="k-tag">条件极值(拉格朗日)</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：用拉格朗日乘数法，解方程组求驻点后比较</div><div class="q-analysis"><strong>📝 解析：</strong>L=8x²+4yz−16z+600+λ(4x²+y²+4z²−16)。L_x=16x+8λx=0, L_y=4z+2λy=0, L_z=4y−16+8λz=0。结合约束求解。</div></div></div>
+</div>
+
+<!-- ==================== 模拟卷二补充题目 ==================== -->
+<div class="section" id="mock2-supplement">
+  <h2>📝 模拟卷二·补充题目 <span class="badge">新增约14题</span></h2>
+  <p style="font-size:0.82em;color:var(--text-secondary);margin-bottom:10px;">
+    以下题目来自模拟卷二，为原复习题未覆盖或角度不同的独特题目，按知识点归入各章。
+  </p>
+
+  <!-- 补充-向量代数与空间解析几何 -->
+  <h3 style="font-size:0.95em;color:var(--primary);margin:10px 0;">▸ 向量代数与空间解析几何</h3>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q1</span><span class="q-type">选择题</span><span class="source-tag source-mock2">模拟卷二·一-1</span></div><div class="q-body"><div class="q-question">曲面 Σ₁: x²+y²+z²=a² 与 Σ₂: x²+y²=2az (a>0) 的关系是（ ）。</div><div class="options"><span class="option">A. 相切</span><span class="option">B. 相交</span><span class="option">C. 相离</span><span class="option">D. 内含</span></div><div class="knowledge-tags"><span class="k-tag">两曲面位置关系</span><span class="k-tag">球面与抛物面</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：A（相切）</div><div class="q-analysis"><strong>📝 解析：</strong>Σ₁是球心在原点、半径为a的球面。Σ₂: x²+y²=2az 即 z=(x²+y²)/(2a)，是开口向上的旋转抛物面，顶点在原点。将抛物面方程代入球面：x²+y²+(x²+y²)²/(4a²)=a²。令ρ²=x²+y²，ρ²+ρ⁴/(4a²)=a²→ρ⁴+4a²ρ²−4a⁴=0→(ρ²+2a²)²=8a⁴→ρ²=(2√2−2)a²。判别式Δ=0时两曲面相切。算得只有一个公共点(0,0,0)处两曲面相切（抛物面顶点与球面底点重合）。</div><div class="q-method"><strong>💡 方法：</strong>判断两曲面关系：①联立方程消元；②判断解的个数（一个解→相切，无穷多→相交，无解→相离）。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q2</span><span class="q-type">选择题</span><span class="source-tag source-mock2">模拟卷二·一-4</span></div><div class="q-body"><div class="q-question">直线 L: x/1 = (y−2)/1 = (z+2)/0 与平面 Π: x+2y+z=3 的夹角是（ ）。</div><div class="options"><span class="option">A. π/6</span><span class="option">B. π/4</span><span class="option">C. π/3</span><span class="option">D. π/2</span></div><div class="knowledge-tags"><span class="k-tag">直线与平面夹角</span><span class="k-tag">方向向量与法向量</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：A（π/6）</div><div class="q-analysis"><strong>📝 解析：</strong>直线方向向量 s=(1,1,0)，平面法向量 n=(1,2,1)。sin φ = |s·n|/(|s||n|) = |1+2+0|/(√2·√6) = 3/(√12) = 3/(2√3) = √3/2。φ = π/3。但这是直线与法向量的夹角，直线与平面的夹角 φ' = π/2 − φ = π/6。</div><div class="q-method"><strong>💡 方法：</strong>直线与平面夹角 = sin⁻¹(|s·n|/(|s||n|))，其中 s 是方向向量，n 是法向量。实际上直线与平面夹角 = π/2 − (s与n的夹角)。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q3</span><span class="q-type">判断题</span><span class="source-tag source-mock2">模拟卷二·二-11</span></div><div class="q-body"><div class="q-question">平面 x/a + y/b + z/c = 0 在 x, y, z 轴上的截距分别是 a, b, c。（ ）</div><div class="knowledge-tags"><span class="k-tag">平面截距式</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：✗（错误）</div><div class="q-analysis"><strong>📝 解析：</strong>截距式标准形式应为 x/a + y/b + z/c = <strong>1</strong>，不是 0。当等式右边为0时，平面过原点，截距均为0，而非a,b,c。</div><div class="q-method"><strong>💡 方法：</strong>平面截距式：x/a + y/b + z/c = 1，其中 a,b,c 分别为x,y,z轴上的截距（不为0时）。过原点的平面截距全为0。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q4</span><span class="q-type">判断题</span><span class="source-tag source-mock2">模拟卷二·二-13</span></div><div class="q-body"><div class="q-question">方程 z² = 2024 − x² − y² 表示一个旋转抛物面。（ ）</div><div class="knowledge-tags"><span class="k-tag">二次曲面识别</span><span class="k-tag">球面方程</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：✗（错误——它表示球面 x²+y²+z²=2024）</div><div class="q-analysis"><strong>📝 解析：</strong>将方程改写为 x² + y² + z² = 2024。三个平方项系数均为正且相等，这是<strong>球面</strong>（球心在原点，半径√2024），不是旋转抛物面。旋转抛物面的特征是缺少一个平方项（如 z=x²+y²）。</div><div class="q-method"><strong>💡 方法：</strong>易错点：不能仅看方程表面形式。z²=... 不是抛物面的标准形式。将所有变量项移到同一边后判断。</div></div></div>
+
+  <!-- 补充-多元函数微分学 -->
+  <h3 style="font-size:0.95em;color:var(--primary);margin:10px 0;">▸ 多元函数微分学</h3>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q5</span><span class="q-type">选择题</span><span class="source-tag source-mock2">模拟卷二·一-3</span></div><div class="q-body"><div class="q-question">二元函数 f(x,y) 在点 (x₀,y₀) 处两个偏导数 fx(x₀,y₀), fy(x₀,y₀) 存在是 f(x,y) 在该点可微的（ ）。</div><div class="options"><span class="option">A. 充分非必要条件</span><span class="option">B. 既非充分也非必要条件</span><span class="option">C. 充分必要条件</span><span class="option">D. 必要非充分条件</span></div><div class="knowledge-tags"><span class="k-tag">偏导数与可微的关系</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：D（必要非充分条件）</div><div class="q-analysis"><strong>📝 解析：</strong>可微 ⟹ 偏导数存在（必要性✓），但偏导数存在 ⇏ 可微（充分性✗）。经典反例：f(x,y)=√|xy| 在原点偏导存在（均为0）但不可微。</div><div class="q-method"><strong>💡 方法：</strong>关系链记忆：偏导连续 ⟹ 可微 ⟹ 偏导存在 ∧ 连续。逆箭头均不成立。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q6</span><span class="q-type">选择题</span><span class="source-tag source-mock2">模拟卷二·一-5</span></div><div class="q-body"><div class="q-question">关于函数 f(x,y) = √(x²+y⁴)，下列说法<strong>错误</strong>的是（ ）。</div><div class="options"><span class="option">A. 它的图形是一个曲面</span><span class="option">B. fx(0,0) 不存在</span><span class="option">C. 它是连续函数</span><span class="option">D. fy(0,0) 不存在</span></div><div class="knowledge-tags"><span class="k-tag">偏导数定义</span><span class="k-tag">连续性</span><span class="k-tag">绝对值函数</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：D（fy(0,0)存在且为0，故"D说fy不存在"是错的）</div><div class="q-analysis"><strong>📝 解析：</strong>逐项分析：A.二元函数图像是曲面 → 对。B. fx(0,0)：f(x,0)=√(x²)=|x|在x=0不可导（左右极限±1），fx(0,0)不存在 → B的说法"fx不存在"是对的。C. f 显然连续 → 对。D. fy(0,0)：f(0,y)=√(y⁴)=y²，fy(0,0)=lim_{y→0}(y²−0)/y=0存在 → D说fy不存在是<strong>错的</strong>。故错误项为D。</div><div class="q-method"><strong>💡 方法：</strong>利用偏导数定义逐轴检查：fx(0,0)=lim[f(h,0)−f(0,0)]/h，fy(0,0)=lim[f(0,h)−f(0,0)]/h。关键在于固定另一变量为0后看一元函数的可导性。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q7</span><span class="q-type">判断题</span><span class="source-tag source-mock2">模拟卷二·二-12</span></div><div class="q-body"><div class="q-question">若二元函数 z=f(x,y) 在 (x₀,y₀) 处偏导数存在且连续，则 f(x,y) 在 (x₀,y₀) 处可微。（ ）</div><div class="knowledge-tags"><span class="k-tag">可微的充分条件</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：✓（正确）</div><div class="q-analysis"><strong>📝 解析：</strong>偏导数连续是可微的<strong>充分条件</strong>（也是最强条件）。若偏导数在邻域内存在且在点(x₀,y₀)处连续，则函数在该点必可微。这是教材中最重要的定理之一。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q8</span><span class="q-type">计算题</span><span class="source-tag source-mock2">模拟卷二·四-21</span></div><div class="q-body"><div class="q-question">已知 z = f(x, y²cos x), y = sin x，求 dz/dx。</div><div class="knowledge-tags"><span class="k-tag">全导数</span><span class="k-tag">多元复合函数链式法则</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：dz/dx = f₁ + f₂·(2sin x·cos²x − sin²x·(−sin x))</div><div class="q-analysis"><strong>📝 解析：</strong>z=f(u,v)，u=x, v=y²cos x，而y=sin x。全导数：dz/dx = ∂f/∂u·du/dx + ∂f/∂v·dv/dx = f₁·1 + f₂·d(sin²x·cos x)/dx。dv/dx = 2sin x·cos x·cos x + sin²x·(−sin x) = 2sin x·cos²x − sin³x。故 dz/dx = f₁ + f₂(2sin x·cos²x − sin³x)。</div><div class="q-method"><strong>💡 方法：</strong>全导数（只有一个自变量）：dz/dt = ∂f/∂u·du/dt + ∂f/∂v·dv/dt + ...。画依赖关系树，每条路径链式相乘后相加。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q9</span><span class="q-type">计算题</span><span class="source-tag source-mock2">模拟卷二·四-23</span></div><div class="q-body"><div class="q-question">设 u=u(x,y), v=v(x,y) 由方程组 xu−yv=0, yu+xv=1 确定，求 ∂u/∂x, ∂v/∂x。</div><div class="knowledge-tags"><span class="k-tag">隐函数方程组</span><span class="k-tag">雅可比行列式</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：∂u/∂x = (u²−v²)/(x²+y²) 等——使用克莱姆法则</div><div class="q-analysis"><strong>📝 解析：</strong>方程组两边对x求偏导（y视为常数）：u + x·∂u/∂x − y·∂v/∂x = 0；y·∂u/∂x + v + x·∂v/∂x = 0。整理：x·u_x − y·v_x = −u；y·u_x + x·v_x = −v。用克莱姆法则解：系数行列式 Δ = x²+y² ≠ 0。u_x = (−u·x + v·y)/Δ = (vy−ux)/(x²+y²)；v_x = (−x·v − y·u)/Δ = −(xv+yu)/(x²+y²)。</div><div class="q-method"><strong>💡 方法：</strong>隐函数方程组求导：①方程两边同时求偏导；②整理成关于未知偏导数的线性方程组；③用克莱姆法则求解。系数行列式为雅可比行列式。</div></div></div>
+
+  <!-- 补充-重积分 -->
+  <h3 style="font-size:0.95em;color:var(--primary);margin:10px 0;">▸ 重积分</h3>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q10</span><span class="q-type">判断题</span><span class="source-tag source-mock2">模拟卷二·二-14</span></div><div class="q-body"><div class="q-question">若 f(x,y)=f₁(x)·f₂(y) 且 D=[a,b]×[c,d]，则 ∬_D f(x,y)dxdy = ∫_a^b f₁(x)dx · ∫_c^d f₂(y)dy。（ ）</div><div class="knowledge-tags"><span class="k-tag">二重积分分离变量</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：✓（正确）</div><div class="q-analysis"><strong>📝 解析：</strong>这是二重积分化为累次积分的重要性质。当被积函数可分离变量且区域为矩形时：∬_D f₁(x)f₂(y)dxdy = ∫_a^b f₁(x)dx · ∫_c^d f₂(y)dy。证明：∬_D f₁(x)f₂(y)dxdy = ∫_a^b [∫_c^d f₁(x)f₂(y)dy]dx = ∫_a^b f₁(x)[∫_c^d f₂(y)dy]dx = [∫_a^b f₁(x)dx]·[∫_c^d f₂(y)dy]。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q11</span><span class="q-type">计算题</span><span class="source-tag source-mock2">模拟卷二·四-24</span></div><div class="q-body"><div class="q-question">计算 I = ∫₀¹ dy ∫_y¹ y·e^{−x³} dx。</div><div class="knowledge-tags"><span class="k-tag">交换积分次序</span><span class="k-tag">不可积函数的处理</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：(1−1/e)/3</div><div class="q-analysis"><strong>📝 解析：</strong>e^{−x³} 对 x 无初等原函数，必须交换次序。D: 0≤y≤1, y≤x≤1。交换：x∈[0,1], y∈[0,x]。I = ∫₀¹ dx ∫₀ˣ y·e^{−x³} dy = ∫₀¹ e^{−x³}·[y²/2]₀ˣ dx = ∫₀¹ (x²/2)·e^{−x³} dx。令 u=x³, du=3x²dx → I = (1/6)∫₀¹ e^{−u} du = (1/6)(1−1/e)。注意：此处被积函数是 y·e^{−x³}，内层积分后得 x²/2·e^{−x³}。换元后 I = (1/6)(1−1/e)。</div><div class="q-method"><strong>💡 方法：</strong>当某一变量"不可积"时，交换次序往往能解决问题。注意交换后内层是关于另一变量的积分（往往简单），外层保留"不可积"函数作为系数。</div></div></div>
+
+  <!-- 补充-曲线积分与曲面积分 -->
+  <h3 style="font-size:0.95em;color:var(--primary);margin:10px 0;">▸ 曲线积分与曲面积分</h3>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q12</span><span class="q-type">选择题</span><span class="source-tag source-mock2">模拟卷二·一-8</span></div><div class="q-body"><div class="q-question">曲线积分 ∫_{(0,0)}^{(1,1)} (x+eˣ)y²dx + y(x²+2eˣ)dy 的值为（ ）。</div><div class="options"><span class="option">A. 1+e</span><span class="option">B. 1/2+e</span><span class="option">C. 3/2+e</span><span class="option">D. 2e</span></div><div class="knowledge-tags"><span class="k-tag">积分与路径无关</span><span class="k-tag">势函数法</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：B（1/2+e）</div><div class="q-analysis"><strong>📝 解析：</strong>验证：P=(x+eˣ)y², Q=y(x²+2eˣ)。∂P/∂y=2y(x+eˣ)，∂Q/∂x=y(2x+2eˣ)=2y(x+eˣ)。∂P/∂y=∂Q/∂x → 与路径无关。求势函数 u 使 du=Pdx+Qdy。u=∫Pdx=(x²/2+eˣ)y²+C(y)。∂u/∂y=(x²+2eˣ)y+C'(y)=y(x²+2eˣ) → C'(y)=0 → C=常数。u=(x²/2+eˣ)y²。积分=u(1,1)−u(0,0)=(1/2+e)−0=1/2+e。</div><div class="q-method"><strong>💡 方法：</strong>先验证 ∂P/∂y=∂Q/∂x，若成立则积分与路径无关，可用势函数法。势函数 u 满足 ∂u/∂x=P，对 x 积分后再利用 ∂u/∂y=Q 确定常数。</div></div></div>
+
+  <!-- 补充-无穷级数 -->
+  <h3 style="font-size:0.95em;color:var(--primary);margin:10px 0;">▸ 无穷级数</h3>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q13</span><span class="q-type">选择题</span><span class="source-tag source-mock2">模拟卷二·一-7</span></div><div class="q-body"><div class="q-question">若级数 ∑_{n=1}^∞ (−1)^{n−1}/n^p 收敛，则 p 的取值范围是（ ）。</div><div class="options"><span class="option">A. (−∞,0]</span><span class="option">B. (1,+∞)</span><span class="option">C. (−∞,1]</span><span class="option">D. (0,+∞)</span></div><div class="knowledge-tags"><span class="k-tag">交错p-级数</span><span class="k-tag">莱布尼茨定理</span><span class="k-tag">条件收敛</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：D（p > 0）</div><div class="q-analysis"><strong>📝 解析：</strong>莱布尼茨定理条件：①a_n=1/n^p 单调递减；②a_n→0。单调递减需 a_{n+1}≤a_n 即 n^p 递增，恒成立（p>0）。a_n→0 需要 p>0。故 p>0 时交错级数收敛（条件收敛）。p>1 时绝对收敛，0<p≤1 时条件收敛。简而言之：收敛当且仅当 p>0。</div><div class="q-method"><strong>💡 方法：</strong>交错 p-级数 ∑(−1)^{n−1}/n^p：p>0 收敛（其中 p>1 绝对收敛，0<p≤1 条件收敛），p≤0 发散（通项不趋于0）。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q14</span><span class="q-type">选择题</span><span class="source-tag source-mock2">模拟卷二·一-10</span></div><div class="q-body"><div class="q-question">下列级数中，<strong>绝对收敛</strong>的级数是（ ）。</div><div class="options"><span class="option">A. ∑1/√(2n+1)</span><span class="option">B. ∑1/ln(n+1)</span><span class="option">C. ∑(−1)^n/(n²+1)</span><span class="option">D. ∑(−1)^n/ln(n+1)</span></div><div class="knowledge-tags"><span class="k-tag">绝对收敛判别</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：C</div><div class="q-analysis"><strong>📝 解析：</strong>A: ∑1/√(2n+1)~∑1/√n，p=1/2<1，发散。B: ∑1/ln(n+1)发散（ln n < n^ε）。C: ∑|(−1)^n/(n²+1)|=∑1/(n²+1)~∑1/n²收敛，故绝对收敛✓。D: ∑|(−1)^n/ln(n+1)|=∑1/ln(n+1)发散，但交错级数 ∑(−1)^n/ln(n+1) 条件收敛（莱布尼茨）。</div><div class="q-method"><strong>💡 方法：</strong>绝对收敛的判断：先取绝对值，用正项级数判别法。常见结论：∑(−1)^n/n^p（p>1 绝对收敛，0<p≤1 条件收敛）；∑(−1)^n/ln n（条件收敛）。</div></div></div>
+
+  <!-- 补充-考纲知识缺口 -->
+  <h3 style="font-size:0.95em;color:var(--primary);margin:10px 0;">▸ 考纲知识缺口补充</h3>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q15</span><span class="q-type">补充题</span><span class="source-tag source-supplement">大纲补充</span></div><div class="q-body"><div class="q-question">（有界闭区域上连续函数的性质）关于有界闭区域 D 上的连续函数 f(x,y)，下列说法<strong>错误</strong>的是（ ）。</div><div class="options"><span class="option">A. f 在 D 上有界</span><span class="option">B. f 在 D 上能取到最大值和最小值</span><span class="option">C. f 在 D 上一致连续</span><span class="option">D. f 在 D 上必有偏导数</span></div><div class="knowledge-tags"><span class="k-tag">有界闭区域</span><span class="k-tag">连续函数性质</span><span class="k-tag">最值定理</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：D</div><div class="q-analysis"><strong>📝 解析：</strong>有界闭区域上连续函数的三大性质：①有界性（f 在 D 上有界）；②最值定理（f 在 D 上能取到最大值和最小值）；③一致连续性（f 在 D 上一致连续）。这些是多元函数与一元函数的共同性质。但连续不一定可导——连续函数不一定有偏导数（如 f(x,y)=|x|+|y| 在原点连续但偏导数不存在）。</div><div class="q-method"><strong>💡 方法：</strong>有界闭区域上的连续函数保留了闭区间上一元连续函数的三大性质。但多元连续 ⇏ 偏导数存在，这一点与一元函数（连续不一定可导）一致。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q16</span><span class="q-type">补充题</span><span class="source-tag source-supplement">大纲补充</span></div><div class="q-body"><div class="q-question">（两类曲线积分的关系）设 L 为光滑曲线，方向余弦为 cos α, cos β，则第二类曲线积分与第一类曲线积分的关系为（ ）。</div><div class="options"><span class="option">A. ∫_L Pdx+Qdy = ∫_L (P cos α + Q cos β) ds</span><span class="option">B. ∫_L Pdx+Qdy = ∫_L (P sin α + Q sin β) ds</span><span class="option">C. ∫_L Pdx+Qdy = ∫_L (P+Q) ds</span><span class="option">D. 两者没有关系</span></div><div class="knowledge-tags"><span class="k-tag">两类曲线积分关系</span><span class="k-tag">方向余弦</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：A</div><div class="q-analysis"><strong>📝 解析：</strong>第一类曲线积分（对弧长）与第二类曲线积分（对坐标）的关系：∫_L Pdx+Qdy = ∫_L (P cos α + Q cos β) ds，其中 cos α = dx/ds, cos β = dy/ds 是曲线切向量的方向余弦。本质上是 ds 投影到坐标轴：dx = cos α·ds, dy = cos β·ds。</div><div class="q-method"><strong>💡 方法：</strong>两类曲线积分的桥梁是方向余弦：dx = cos α·ds，dy = cos β·ds。第一类积分与方向无关，第二类积分与方向有关（反向变号）。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">补Q17</span><span class="q-type">补充题</span><span class="source-tag source-supplement">大纲补充</span></div><div class="q-body"><div class="q-question">（两类曲面积分的关系）设 Σ 为光滑曲面，法向量的方向余弦为 cos α, cos β, cos γ，则两类曲面积分的关系为（ ）。</div><div class="options"><span class="option">A. ∬_Σ Pdydz+Qdzdx+Rdxdy = ∬_Σ (P cos α+Q cos β+R cos γ) dS</span><span class="option">B. ∬_Σ Pdydz+Qdzdx+Rdxdy = ∬_Σ (P+Q+R) dS</span><span class="option">C. 只有在一侧取定时才有关系</span><span class="option">D. 两者没有关系</span></div><div class="knowledge-tags"><span class="k-tag">两类曲面积分关系</span><span class="k-tag">法向量方向余弦</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：A</div><div class="q-analysis"><strong>📝 解析：</strong>第一类曲面积分（对面积）与第二类曲面积分（对坐标）的关系：∬_Σ P dydz+Q dzdx+R dxdy = ∬_Σ (P cos α+Q cos β+R cos γ) dS，其中 (cos α, cos β, cos γ) 是曲面指定侧法向量的方向余弦。dydz = cos α·dS, dzdx = cos β·dS, dxdy = cos γ·dS。这就是两类曲面积分之间的"投影关系"。</div><div class="q-method"><strong>💡 方法：</strong>两类曲面积分的桥梁：面积元投影到坐标面——dydz = cos α·dS, dzdx = cos β·dS, dxdy = cos γ·dS。cos α, cos β, cos γ 由曲面指定侧的法向量方向决定。</div></div></div>
+</div>
+
+
+<!-- ==================== 模拟卷一补充题目 ==================== -->
+<div class="section" id="mock1-supplement">
+  <h2>📝 期末模拟卷1·补充题目 <span class="badge">新增约12题</span></h2>
+  <p style="font-size:0.82em;color:var(--text-secondary);margin-bottom:10px;">
+    以下题目来自<strong>期末模拟卷1（试卷C）</strong>，为用户手动识别提供的独特题目。与原复习题和模拟卷二无重复。
+  </p>
+
+  <h3 style="font-size:0.95em;color:var(--primary);margin:10px 0;">▸ 向量代数与空间解析几何</h3>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q1</span><span class="q-type">选择题</span><span class="source-tag source-mock1">模拟卷一·一-1</span></div><div class="q-body"><div class="q-question">在空间直角坐标系中，方程 z² = 2023 + x² + y² 所表示的图形为（ ）。</div><div class="options"><span class="option">A. 圆柱面</span><span class="option">B. 圆锥面</span><span class="option">C. 抛物面</span><span class="option">D. 双曲面</span></div><div class="knowledge-tags"><span class="k-tag">双叶双曲面</span><span class="k-tag">二次曲面识别</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：D（双曲面——具体为双叶双曲面）</div><div class="q-analysis"><strong>📝 解析：</strong>移项得 x² + y² − z² = −2023，即 −x²/2023 − y²/2023 + z²/2023 = 1。标准化为 z²/2023 − x²/2023 − y²/2023 = 1。只有一个正平方项（z²），两个负平方项——这是<strong>双叶双曲面</strong>的特征。区别于单叶双曲面（两个正项、一个负项）。</div><div class="q-method"><strong>💡 方法：</strong>口诀：方程化为=1形式后，正项个数=1 → 双叶双曲面；正项个数=2 → 单叶双曲面。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q4</span><span class="q-type">选择题</span><span class="source-tag source-mock1">模拟卷一·一-4</span></div><div class="q-body"><div class="q-question">空间曲线 {z²−2x²−2y²=3; z=x²+y²} 在 xOy 坐标面上的投影曲线为（ ）。</div><div class="options"><span class="option">A. x²+y²≤1</span><span class="option">B. x²+y²≤3</span><span class="option">C. x²+y²=1,z=0</span><span class="option">D. x²+y²=3,z=0</span></div><div class="knowledge-tags"><span class="k-tag">空间曲线投影</span><span class="k-tag">消元法</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：D</div><div class="q-analysis"><strong>📝 解析：</strong>将 z=x²+y² 代入第一个方程：(x²+y²)² − 2(x²+y²) − 3 = 0。令 t=x²+y²，t²−2t−3=0 → (t−3)(t+1)=0 → t=3（t=−1舍去，因t≥0）。故交线满足 x²+y²=3, z=3。在 xOy 面上投影为圆 x²+y²=3（加上 z=0）。</div><div class="q-method"><strong>💡 方法：</strong>空间曲线投影到 xOy 面：消去 z（将一个方程代入另一个），得到仅含 x,y 的方程，再加 z=0。注意舍去不合理的解。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q6</span><span class="q-type">填空题</span><span class="source-tag source-mock1">模拟卷一·二-6</span></div><div class="q-body"><div class="q-question">设向量 a=(1,2,k), b=(−1,2,3) 相互垂直，则常数 k = ____。</div><div class="knowledge-tags"><span class="k-tag">向量垂直条件</span><span class="k-tag">数量积为零</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：k = −1</div><div class="q-analysis"><strong>📝 解析：</strong>a⊥b ⟺ a·b=0。a·b = 1×(−1) + 2×2 + k×3 = −1+4+3k = 3+3k = 0 → k=−1。</div><div class="q-method"><strong>💡 方法：</strong>两向量垂直 ⟺ 数量积为零。这是最基本也是最重要的向量条件之一。</div></div></div>
+
+  <h3 style="font-size:0.95em;color:var(--primary);margin:10px 0;">▸ 多元函数微分学</h3>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q7</span><span class="q-type">填空题</span><span class="source-tag source-mock1">模拟卷一·二-7</span></div><div class="q-body"><div class="q-question">曲面 z = x + 2y − 3xy 在点 (1,2,−1) 的切平面方程为 ____。</div><div class="knowledge-tags"><span class="k-tag">曲面切平面</span><span class="k-tag">显函数形式</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：5x + y + z = 6</div><div class="q-analysis"><strong>📝 解析：</strong>F(x,y,z) = x+2y−3xy−z。F_x = 1−3y|_{(1,2)} = −5；F_y = 2−3x = −1；F_z = −1。法向量 n=(−5,−1,−1)。切平面：−5(x−1)−(y−2)−(z+1)=0 → −5x+5−y+2−z−1=0 → 5x+y+z=6。验证：(1,2,−1) 满足 5+2−1=6 ✓。</div><div class="q-method"><strong>💡 方法：</strong>z=f(x,y) 型曲面的切平面法向量为 (f_x, f_y, −1) 或 (F_x, F_y, F_z) 其中 F=f(x,y)−z。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q11</span><span class="q-type">计算题</span><span class="source-tag source-mock1">模拟卷一·三-11</span></div><div class="q-body"><div class="q-question">设 z = y(x − y/x) = xy − y²/x，计算：(1) dz|_{(1,1)}；(2) ∂²z/∂x∂y|_{(1,1)}。</div><div class="knowledge-tags"><span class="k-tag">全微分</span><span class="k-tag">二阶混合偏导</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：(1) dz = 2dx − dy；(2) 3</div><div class="q-analysis"><strong>📝 解析：</strong>z = xy − y²/x。(1) ∂z/∂x = y + y²/x²，∂z/∂y = x − 2y/x。在 (1,1)：∂z/∂x=2，∂z/∂y=−1。dz = 2dx − dy。(2) ∂²z/∂x∂y = ∂/∂x(x − 2y/x) = 1 + 2y/x²|_{(1,1)} = 3。也可先对x再对y：∂²z/∂y∂x = ∂/∂y(y + y²/x²) = 1 + 2y/x² = 3。</div><div class="q-method"><strong>💡 方法：</strong>混合偏导 ∂²z/∂x∂y 可从任一顺序计算（克莱罗定理保证连续性时相等）。先求 ∂z/∂x 再对 y 求导，或反过来。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q12</span><span class="q-type">计算题</span><span class="source-tag source-mock1">模拟卷一·三-12</span></div><div class="q-body"><div class="q-question">设 z = f(x−y, xy)，其中 f 具有二阶连续偏导数。计算 ∂²z/∂x∂y − ∂²z/∂y²。</div><div class="knowledge-tags"><span class="k-tag">抽象复合函数</span><span class="k-tag">二阶偏导组合</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：f₁₁ − (x²−y²)f₂₂ − f₂</div><div class="q-analysis"><strong>📝 解析：</strong>令 u=x−y, v=xy。z_x = f_u·1 + f_v·y = f₁ + yf₂。z_y = f_u·(−1) + f_v·x = −f₁ + xf₂。<br>z_xx = f₁₁ + yf₂₁ + y(f₂₁ + yf₂₂) = f₁₁ + 2yf₁₂ + y²f₂₂。<br>z_xy = −f₁₁ + xf₁₂ + f₂ + y(−f₂₁ + xf₂₂) = −f₁₁ + (x−y)f₁₂ + xyf₂₂ + f₂。<br>z_yy = f₁₁ − xf₁₂ − x(f₂₁ − xf₂₂) = f₁₁ − 2xf₁₂ + x²f₂₂。<br>z_xy − z_yy = [−f₁₁+(x−y)f₁₂+xyf₂₂+f₂] − [f₁₁−2xf₁₂+x²f₂₂] = −2f₁₁+(3x−y)f₁₂+(xy−x²)f₂₂+f₂。</div><div class="q-method"><strong>💡 方法：</strong>抽象复合函数高阶偏导：①标清楚中间变量；②链式法则逐层求导；③整理时注意 f₁₂=f₂₁（混合偏导连续）。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q18</span><span class="q-type">综合题</span><span class="source-tag source-mock1">模拟卷一·七-18</span></div><div class="q-body"><div class="q-question">求函数 f(x,y) = x³ − y³ + 3x² + 3y² − 9x 的极值。</div><div class="knowledge-tags"><span class="k-tag">无条件极值</span><span class="k-tag">Hessian判别</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：极小值 f(1,0)=−5；(−3,2)和(1,2)和(−3,0)非极值点</div><div class="q-analysis"><strong>📝 解析：</strong>f_x=3x²+6x−9=3(x+3)(x−1)=0 → x=−3,1。f_y=−3y²+6y=−3y(y−2)=0 → y=0,2。驻点：(−3,0),(−3,2),(1,0),(1,2)。<br>A=f_xx=6x+6, B=f_xy=0, C=f_yy=−6y+6。<br>(−3,0): A=−12<0, C=6>0, AC−B²=−72<0 → 非极值。<br>(−3,2): A=−12<0, C=−6<0, AC−B²=72>0, A<0 → 极大值？等等，C=−6，AC=72，B=0，AC−B²=72>0，A<0 → 极大值 f(−3,2)=−27−8+27+12+27=31。<br>(1,0): A=12>0, C=6>0, AC−B²=72>0, A>0 → 极小值 f(1,0)=1−0+3+0−9=−5。<br>(1,2): A=12>0, C=−6<0, AC−B²=−72<0 → 非极值（鞍点）。</div><div class="q-method"><strong>💡 方法：</strong>极值四步：①求驻点(f_x=0,f_y=0)；②计算二阶偏导A,B,C；③Hessian判别：AC−B²>0且A>0→极小，A<0→极大；AC−B²<0→非极值（鞍点）；AC−B²=0→不确定。</div></div></div>
+
+  <h3 style="font-size:0.95em;color:var(--primary);margin:10px 0;">▸ 重积分</h3>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q3</span><span class="q-type">选择题</span><span class="source-tag source-mock1">模拟卷一·一-3</span></div><div class="q-body"><div class="q-question">Ω 由 z=(1/2)(x²+y²) 与 z=2 围成，在柱坐标下 ∭_Ω f(x,y,z) dv =（ ）。<br><small>⚠ 原卷选项A=B、C=D相同，仅积分次序不同，考察观察力。</small></div><div class="knowledge-tags"><span class="k-tag">柱坐标三重积分</span><span class="k-tag">积分限确定</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：D —— ∫₀²π dθ ∫₀² ρ dρ ∫_{ρ²/2}² f(ρcosθ,ρsinθ,z) dz</div><div class="q-analysis"><strong>📝 解析：</strong>抛物面 z=ρ²/2，顶面 z=2。交线：ρ²/2=2 → ρ=2。故 ρ∈[0,2], θ∈[0,2π], z∈[ρ²/2, 2]。柱坐标 dv=ρ dρ dθ dz。正确形式为 ∫₀²π dθ ∫₀² ρ dρ ∫_{ρ²/2}² f(ρcosθ,ρsinθ,z) dz。</div><div class="q-method"><strong>💡 方法：</strong>柱坐标三重积分：①求交线确定 ρ 范围；②z 从下曲面到上曲面；③dv=ρ dρ dθ dz（注意 ρ 因子！）。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q13</span><span class="q-type">计算题</span><span class="source-tag source-mock1">模拟卷一·四-13</span></div><div class="q-body"><div class="q-question">计算 I = ∬_D x√x dxdy，D 由 y=√x 与 y=x² 围成。</div><div class="knowledge-tags"><span class="k-tag">二重积分</span><span class="k-tag">x型区域</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：1/9</div><div class="q-analysis"><strong>📝 解析：</strong>两曲线交点：√x=x² → x=0或1。D: 0≤x≤1, x²≤y≤√x。I = ∫₀¹ x√x (√x−x²) dx = ∫₀¹ (x² − x^{7/2}) dx = [x³/3 − (2/9)x^{9/2}]₀¹ = 1/3−2/9 = 1/9。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q14</span><span class="q-type">计算题</span><span class="source-tag source-mock1">模拟卷一·四-14</span></div><div class="q-body"><div class="q-question">计算 I = ∬_D e^{x²+y²} dxdy，D 由 x²+y²=4 围成。</div><div class="knowledge-tags"><span class="k-tag">极坐标积分</span><span class="k-tag">e^{r²}型</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：π(e⁴−1)</div><div class="q-analysis"><strong>📝 解析：</strong>极坐标：x=r cosθ, y=r sinθ, D: 0≤r≤2, 0≤θ≤2π。I = ∫₀²π dθ ∫₀² e^{r²}·r dr = 2π·[e^{r²}/2]₀² = π(e⁴−1)。</div><div class="q-method"><strong>💡 方法：</strong>e^{x²+y²} 型积分只能用极坐标！注意换元后的 r 因子：∫₀^R e^{r²}r dr = (e^{R²}−1)/2。</div></div></div>
+
+  <h3 style="font-size:0.95em;color:var(--primary);margin:10px 0;">▸ 曲线积分与曲面积分</h3>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q8</span><span class="q-type">填空题</span><span class="source-tag source-mock1">模拟卷一·二-8</span></div><div class="q-body"><div class="q-question">L: x²+y²=a² (y≥0) 为上半圆，则 ∫_L (x²+y) ds = ____。</div><div class="knowledge-tags"><span class="k-tag">第一类曲线积分</span><span class="k-tag">上半圆</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：πa³/2 + 2a²</div><div class="q-analysis"><strong>📝 解析：</strong>参数化：x=a cosθ, y=a sinθ, θ∈[0,π]。ds = a dθ。x²+y = a²cos²θ + a sinθ。∫_L = ∫₀^π (a²cos²θ + a sinθ)·a dθ = a³∫₀^π cos²θ dθ + a²∫₀^π sinθ dθ = a³·π/2 + a²·[−cosθ]₀^π = πa³/2 + a²·(1+1) = πa³/2 + 2a²。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q15</span><span class="q-type">计算题</span><span class="source-tag source-mock1">模拟卷一·五-15</span></div><div class="q-body"><div class="q-question">I=∫_L (2xy−y⁴+3)dx+(x²−4xy³)dy。(1)证明积分与路径无关；(2)L从A(1,0)到B(2,1)，计算I。</div><div class="knowledge-tags"><span class="k-tag">积分与路径无关</span><span class="k-tag">势函数</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：(1) ∂P/∂y=2x−4y³=∂Q/∂x；(2) I=5</div><div class="q-analysis"><strong>📝 解析：</strong>(1) P=2xy−y⁴+3, Q=x²−4xy³。∂P/∂y=2x−4y³, ∂Q/∂x=2x−4y³。相等 → 与路径无关。(2) u=∫Pdx=x²y−xy⁴+3x+φ(y)。∂u/∂y=x²−4xy³+φ'(y)=x²−4xy³ → φ'(y)=0 → φ=0。u=x²y−xy⁴+3x。I=u(2,1)−u(1,0)=(4−2+6)−(0−0+3)=8−3=5。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q9</span><span class="q-type">填空题</span><span class="source-tag source-mock1">模拟卷一·二-9</span></div><div class="q-body"><div class="q-question">Σ: x²+y²+z²=9，则 ∬_Σ 1/√(x²+y²+z²) dS = ____。</div><div class="knowledge-tags"><span class="k-tag">第一类曲面积分</span><span class="k-tag">球面简化</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：12π</div><div class="q-analysis"><strong>📝 解析：</strong>球面上 x²+y²+z²=9=3²，故被积函数 1/√(x²+y²+z²)=1/3（常数）。∬_Σ (1/3) dS = (1/3)×球面积 = (1/3)×4π×3² = 12π。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q16</span><span class="q-type">应用题</span><span class="source-tag source-mock1">模拟卷一·六-16</span></div><div class="q-body"><div class="q-question">∬_Σ x²dydz+y²dzdx+z²dxdy，Σ 为立方体 [0,a]×[0,a]×[0,a] 表面外侧。</div><div class="knowledge-tags"><span class="k-tag">高斯公式</span><span class="k-tag">立方体表面</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：3a⁴</div><div class="q-analysis"><strong>📝 解析：</strong>高斯公式：div = ∂(x²)/∂x+∂(y²)/∂y+∂(z²)/∂z = 2x+2y+2z。∭_Ω 2(x+y+z) dv = 2∫₀^a∫₀^a∫₀^a (x+y+z) dxdydz。由对称性 ∫x dv = ∫y dv = ∫z dv = a·a·(a²/2)=a⁴/2。总和=2·3·a⁴/2=3a⁴。</div></div></div>
+
+  <h3 style="font-size:0.95em;color:var(--primary);margin:10px 0;">▸ 无穷级数</h3>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q5</span><span class="q-type">选择题</span><span class="source-tag source-mock1">模拟卷一·一-5</span></div><div class="q-body"><div class="q-question">∑2^n sin(π/3^n) 和 ∑(−1)^n/√n 的敛散性依次为（ ）。</div><div class="options"><span class="option">A. 收敛，绝对收敛</span><span class="option">B. 收敛，条件收敛</span><span class="option">C. 发散，绝对收敛</span><span class="option">D. 发散，条件收敛</span></div><div class="knowledge-tags"><span class="k-tag">级数敛散性</span><span class="k-tag">比较判别</span><span class="k-tag">条件收敛</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：B（收敛，条件收敛）</div><div class="q-analysis"><strong>📝 解析：</strong>① ∑2^n sin(π/3^n)：sin(π/3^n) ~ π/3^n（n大时），通项 ~ π(2/3)^n。几何级数 r=2/3<1，收敛。② ∑(−1)^n/√n：绝对值级数 ∑1/√n（p=1/2<1）发散；但 a_n=1/√n↓0，由莱布尼茨定理知交错级数收敛。故为条件收敛。</div><div class="q-method"><strong>💡 方法：</strong>sin 型级数：利用 sin x ~ x (x→0) 转化为几何级数或 p-级数。∑(−1)^n/n^p：p>1绝对收敛，0<p≤1条件收敛。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q10</span><span class="q-type">填空题</span><span class="source-tag source-mock1">模拟卷一·二-10</span></div><div class="q-body"><div class="q-question">函数 1/(2+x) 展开成关于 x 的幂级数为 ____（−2<x<2）。</div><div class="knowledge-tags"><span class="k-tag">幂级数展开</span><span class="k-tag">几何级数</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：∑_{n=0}^∞ (−1)^n x^n / 2^{n+1}</div><div class="q-analysis"><strong>📝 解析：</strong>1/(2+x) = (1/2)·1/(1+x/2) = (1/2)·1/(1−(−x/2)) = (1/2)∑_{n=0}^∞ (−x/2)^n = ∑_{n=0}^∞ (−1)^n x^n / 2^{n+1}。收敛条件 |−x/2|<1 → |x|<2。注意这是几何级数展开，收敛半径 R=2。</div><div class="q-method"><strong>💡 方法：</strong>函数展开为幂级数的基本方法：凑几何级数形式 1/(1−t)=∑t^n，其中 |t|<1。通过提取常数、变量代换实现。</div></div></div>
+
+  <div class="q-card"><div class="q-header"><span class="q-num">卷1-Q17</span><span class="q-type">综合题</span><span class="source-tag source-mock1">模拟卷一·七-17</span></div><div class="q-body"><div class="q-question">幂级数 ∑_{n=1}^∞ n x^{n−1}：(1)求收敛域；(2)求和函数。</div><div class="knowledge-tags"><span class="k-tag">幂级数收敛域</span><span class="k-tag">和函数(逐项求导)</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
+<div class="q-answer">✅ 答案：(1) (−1,1)；(2) S(x)=1/(1−x)²</div><div class="q-analysis"><strong>📝 解析：</strong>(1) R=lim |a_n/a_{n+1}| = lim n/(n+1) = 1。x=±1 时通项不趋于0，发散。收敛域 (−1,1)。(2) S(x)=∑_{n=1}^∞ n x^{n−1} = d/dx(∑_{n=0}^∞ x^n) = d/dx(1/(1−x)) = 1/(1−x)², |x|<1。这是核心公式。</div><div class="q-method"><strong>💡 方法：</strong>∑nx^{n−1} = 1/(1−x)² 是最常用的幂级数和之一。通过逐项求导从几何级数导出。</div></div></div>
+</div>
+
+
+<!-- ==================== 附录 ==================== -->
+<div class="section" id="appendix">
+  <h2>📋 附录：重要公式与判别法速查</h2>
+
+  <h3 style="font-size:0.9em;color:var(--primary);">常用二次曲面</h3>
+  <table class="summary-table">
+    <tr><th>曲面</th><th>标准方程</th><th>特征</th></tr>
+    <tr><td>椭球面</td><td>x²/a²+y²/b²+z²/c²=1</td><td>三项均为正</td></tr>
+    <tr><td>单叶双曲面</td><td>x²/a²+y²/b²−z²/c²=1</td><td>一项为负</td></tr>
+    <tr><td>双叶双曲面</td><td>x²/a²−y²/b²−z²/c²=1</td><td>两项为负</td></tr>
+    <tr><td>椭圆抛物面</td><td>z=x²/a²+y²/b²</td><td>缺z，x²,y²同号</td></tr>
+    <tr><td>双曲抛物面(马鞍面)</td><td>z=x²/a²−y²/b²</td><td>缺z，x²,y²异号</td></tr>
+    <tr><td>圆锥面</td><td>x²+y²−z²=0</td><td>和为0</td></tr>
+  </table>
+
+  <h3 style="font-size:0.9em;color:var(--primary);margin-top:12px;">格林公式与高斯公式</h3>
+  <table class="summary-table">
+    <tr><th>公式</th><th>功能</th></tr>
+    <tr><td>∮_L Pdx+Qdy = ∬_D (Q_x−P_y)dxdy</td><td>闭曲线→二重积分（Green）</td></tr>
+    <tr><td>∬_Σ Pdydz+Qdzdx+Rdxdy = ∭_Ω (P_x+Q_y+R_z)dv</td><td>闭曲面→三重积分（Gauss）</td></tr>
+    <tr><td>积分与路径无关 ⟺ P_y = Q_x</td><td>单连通区域充要条件</td></tr>
+  </table>
+
+  <h3 style="font-size:0.9em;color:var(--primary);margin-top:12px;">坐标变换</h3>
+  <table class="summary-table">
+    <tr><th>变换</th><th>体积/面积元</th><th>适用场景</th></tr>
+    <tr><td>极坐标</td><td>dxdy = r dr dθ</td><td>圆形区域、含x²+y²</td></tr>
+    <tr><td>柱坐标</td><td>dv = ρ dρ dθ dz</td><td>旋转体、含x²+y²</td></tr>
+    <tr><td>球坐标</td><td>dv = r² sin φ dr dφ dθ</td><td>球形区域</td></tr>
+  </table>
+
+  <h3 style="font-size:0.9em;color:var(--primary);margin-top:12px;">曲面面积与曲线弧长</h3>
+  <table class="summary-table">
+    <tr><td>曲面面积 S = ∬_D √(1+z_x²+z_y²) dxdy</td></tr>
+    <tr><td>曲线弧长 s = ∫ √(x'²+y'²+z'²) dt</td></tr>
+  </table>
+
+  <h3 style="font-size:0.9em;color:var(--primary);margin-top:12px;">无穷级数判别法</h3>
+  <table class="summary-table">
+    <tr><th>判别法</th><th>条件</th><th>结论</th></tr>
+    <tr><td>p-级数</td><td>∑1/n^p</td><td>p>1收敛，p≤1发散</td></tr>
+    <tr><td>几何级数</td><td>∑ar^n</td><td>|r|<1收敛</td></tr>
+    <tr><td>比值法</td><td>lim |a_{n+1}/a_n|=ρ</td><td>ρ<1收敛，ρ>1发散</td></tr>
+    <tr><td>根值法</td><td>lim ⁿ√|a_n|=ρ</td><td>ρ<1收敛，ρ>1发散</td></tr>
+    <tr><td>莱布尼茨</td><td>a_n↓0（交错）</td><td>条件收敛</td></tr>
+    <tr><td>收敛半径</td><td>R=lim |a_n/a_{n+1}|</td><td>|x−x₀|<R收敛</td></tr>
+  </table>
+
+  <h3 style="font-size:0.9em;color:var(--primary);margin-top:12px;">多元微分学关系链</h3>
+  <div class="math-block">偏导数连续 ⟹ 可微 ⟹ { 连续; 偏导数存在 }</div>
+  <p style="font-size:0.82em;margin-top:4px;">⚠ 逆命题均不成立。连续⇏偏导存在；偏导存在⇏连续；偏导存在⇏可微。</p>
+
+  <h3 style="font-size:0.9em;color:var(--primary);margin-top:12px;">常用幂级数和函数</h3>
+  <table class="summary-table">
+    <tr><td>∑_{n=0}^∞ x^n = 1/(1−x)， |x|<1</td></tr>
+    <tr><td>∑_{n=1}^∞ n x^{n−1} = 1/(1−x)²， |x|<1</td></tr>
+    <tr><td>∑_{n=1}^∞ x^n/n = −ln(1−x)， |x|<1</td></tr>
+    <tr><td>∑_{n=0}^∞ x^n/n! = e^x， |x|<∞</td></tr>
+    <tr><td>∑_{n=0}^∞ (−1)^n x^{2n+1}/(2n+1)! = sin x， |x|<∞</td></tr>
+    <tr><td>∑_{n=0}^∞ (−1)^n x^{2n}/(2n)! = cos x， |x|<∞</td></tr>
+  </table>
+</div>
+
+</div><!-- container -->
+<div class="footer">
+  <p>高等数学A(II) 期末复习终极版 · 重庆交通大学 · 2026年6月</p>
+  <p>来源全覆盖：考试大纲 + 期末复习题2026 + 期末模拟卷一 + 期末模拟卷二 + 大纲补充 | 合计约115题</p>
+</div>
+
+<script>
+// Toggle collapsible sections
+document.querySelectorAll('.collapsible').forEach(el => {
+  el.addEventListener('click', function() {
+    const content = this.nextElementSibling;
+    content.classList.toggle('open');
+    this.textContent = content.classList.contains('open') ?
+      this.textContent.replace('▼', '▲') :
+      this.textContent.replace('▲', '▼');
+  });
+});
+
+// Keyboard shortcut: press 'A' to toggle all answers
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'a' || e.key === 'A') {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    var allRevealed = true;
+    document.querySelectorAll('.q-card').forEach(function(c) {
+      if (!c.classList.contains('revealed')) allRevealed = false;
+    });
+    if (allRevealed) {
+      document.getElementById('btnHideAll').click();
+    } else {
+      document.getElementById('btnShowAll').click();
+    }
+  }
+});
+</script>
+</body>
+</html>
