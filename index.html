@@ -232,21 +232,6 @@ body {
 .options { margin: 6px 0; font-size: 0.88em; }
 .option { display: inline-block; margin-right: 16px; margin-bottom: 4px; }
 
-/* Collapsible */
-.collapsible {
-  cursor: pointer;
-  user-select: none;
-  color: var(--primary);
-  font-size: 0.85em;
-  text-align: center;
-  padding: 6px;
-  border-top: 1px dashed var(--border);
-}
-.collapsible:hover { background: #f0f7ff; }
-
-.collapse-content { display: none; padding: 0 12px 10px; }
-.collapse-content.open { display: block; }
-
 /* Summary table */
 .summary-table {
   width: 100%;
@@ -359,10 +344,10 @@ body {
 }
 
 @media print {
-  .nav, .collapsible { display: none; }
+  .nav { display: none; }
   .header { position: static; }
   .q-card { break-inside: avoid; }
-  .collapse-content { display: block !important; }
+
 }
 </style>
 </head>
@@ -901,12 +886,7 @@ body {
     </div>
   </div>
 
-  <div class="collapsible" onclick="this.nextElementSibling.classList.toggle('open'); this.textContent = this.textContent.includes('展开') ? '▲ 收起剩余题目' : '▼ 展开更多向量代数与空间解析几何题目 (Q17-Q20)'">
-    ▼ 展开更多向量代数与空间解析几何题目 (Q17-Q20)
-  </div>
-  <div class="collapse-content">
-
-  <!-- Q1.17 - 补充: 方向角与方向余弦 -->
+<!-- Q1.17 - 补充: 方向角与方向余弦 -->
   <div class="q-card">
     <div class="q-header">
       <span class="q-num">Q17</span>
@@ -1026,7 +1006,6 @@ body {
 
   <div class="q-card"><div class="q-header"><span class="q-num">Q27</span><span class="q-type">填空题</span><span class="source-tag source-mock1">模拟卷一·二-6</span></div><div class="q-body"><div class="q-question">设向量 a=(1,2,k), b=(−1,2,3) 相互垂直，则常数 k = ____。</div><div class="knowledge-tags"><span class="k-tag">向量垂直条件</span><span class="k-tag">数量积为零</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
 <div class="q-answer">✅ 答案：k = −1</div><div class="q-analysis"><strong>📝 解析：</strong>a⊥b ⟺ a·b=0。a·b = 1×(−1) + 2×2 + k×3 = −1+4+3k = 3+3k = 0 → k=−1。</div><div class="q-method"><strong>💡 方法：</strong>两向量垂直 ⟺ 数量积为零。这是最基本也是最重要的向量条件之一。</div></div></div>
-</div><!-- end collapse -->
 </div>
 
 <!-- ================================================================== -->
@@ -1312,12 +1291,7 @@ body {
     </div>
   </div>
 
-  <div class="collapsible" onclick="this.nextElementSibling.classList.toggle('open'); this.textContent = this.textContent.includes('展开') ? '▲ 收起剩余题目' : '▼ 展开更多多元函数微分学题目 (Q30-Q42)'">
-    ▼ 展开更多多元函数微分学题目 (Q30-Q42)
-  </div>
-  <div class="collapse-content">
-
-  <!-- Q2.10 - 可微与偏导存在的关系 -->
+<!-- Q2.10 - 可微与偏导存在的关系 -->
   <div class="q-card">
     <div class="q-header">
       <span class="q-num">Q37</span>
@@ -1680,7 +1654,6 @@ body {
 
   <div class="q-card"><div class="q-header"><span class="q-num">Q59</span><span class="q-type">综合题</span><span class="source-tag source-mock1">模拟卷一·七-18</span></div><div class="q-body"><div class="q-question">求函数 f(x,y) = x³ − y³ + 3x² + 3y² − 9x 的极值。</div><div class="knowledge-tags"><span class="k-tag">无条件极值</span><span class="k-tag">Hessian判别</span></div><div class="reveal-btn" onclick="var c=this.parentElement.parentElement;c.classList.toggle('revealed');this.textContent=c.classList.contains('revealed')?'▲ 隐藏答案':'▼ 点击查看答案与解析'">▼ 点击查看答案与解析</div>
 <div class="q-answer">✅ 答案：极小值 f(1,0)=−5；(−3,2)和(1,2)和(−3,0)非极值点</div><div class="q-analysis"><strong>📝 解析：</strong>f_x=3x²+6x−9=3(x+3)(x−1)=0 → x=−3,1。f_y=−3y²+6y=−3y(y−2)=0 → y=0,2。驻点：(−3,0),(−3,2),(1,0),(1,2)。<br>A=f_xx=6x+6, B=f_xy=0, C=f_yy=−6y+6。<br>(−3,0): A=−12<0, C=6>0, AC−B²=−72<0 → 非极值。<br>(−3,2): A=−12<0, C=−6<0, AC−B²=72>0, A<0 → 极大值？等等，C=−6，AC=72，B=0，AC−B²=72>0，A<0 → 极大值 f(−3,2)=−27−8+27+12+27=31。<br>(1,0): A=12>0, C=6>0, AC−B²=72>0, A>0 → 极小值 f(1,0)=1−0+3+0−9=−5。<br>(1,2): A=12>0, C=−6<0, AC−B²=−72<0 → 非极值（鞍点）。</div><div class="q-method"><strong>💡 方法：</strong>极值四步：①求驻点(f_x=0,f_y=0)；②计算二阶偏导A,B,C；③Hessian判别：AC−B²>0且A>0→极小，A<0→极大；AC−B²<0→非极值（鞍点）；AC−B²=0→不确定。</div></div></div>
-</div><!-- end collapse -->
 </div>
 
 <!-- ================================================================== -->
@@ -1955,17 +1928,6 @@ body {
 </div>
 
 <script>
-// Toggle collapsible sections
-document.querySelectorAll('.collapsible').forEach(el => {
-  el.addEventListener('click', function() {
-    const content = this.nextElementSibling;
-    content.classList.toggle('open');
-    this.textContent = content.classList.contains('open') ?
-      this.textContent.replace('▼', '▲') :
-      this.textContent.replace('▲', '▼');
-  });
-});
-
 // Keyboard shortcut: press 'A' to toggle all answers
 document.addEventListener('keydown', function(e) {
   if (e.key === 'a' || e.key === 'A') {
